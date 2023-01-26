@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SuarQuizCodeApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //String propios
+    <string name="register_now">¿No tienes una cuenta? Regístrate ahora.</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="register_button">Registrar cuenta</string>
+    <string name="tb_introMail">Introduce un e-mail válido</string>
+    <string name="tb_introPass">Introduce contraseña</string>
+    <string name="tv_result">Resultado</string>
+    <string name="lorem_ipsum">Resultado</string>
+    <string name="tv_resultado">Resultado</string>
+    <string name="tv_acertadas">Respuestas acertadas:</string>
+    <string name="tv_puntuacion">Puntuación obtenida</string>
+</resources>
