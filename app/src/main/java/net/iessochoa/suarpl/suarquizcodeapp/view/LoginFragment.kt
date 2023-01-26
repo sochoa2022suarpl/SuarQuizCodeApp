@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import net.iessochoa.suarpl.suarquizcodeapp.R
@@ -24,7 +25,7 @@ class LoginFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //ToDo IMPLEMENTAR CONFIRMACIÓN DE SALIDA
-        /*Asignando al botón back una acción personalizada
+        /*Asignando al botón back una acción personalizada para no volver al Splash
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Toast.makeText(activity, "Test back", Toast.LENGTH_LONG).show()
