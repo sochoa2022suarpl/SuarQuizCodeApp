@@ -17,4 +17,12 @@
     <string name="tv_splash">Desarrollado por Suar PL</string>
     <string name="iv_SplashDescription">SplashLogo</string>
     <string name="te_nombreRegistro">Nombre de usuario</string>
+    <string name="tv_cantMonedas">XXXXXX</string>
+    <string name="tv_monedas">monedas</string>
+    <string name="rb_facil">Fácil</string>
+    <string name="rb_normal">Normal</string>
+    <string name="tv_dificultad">Dificultad</string>
+    <string name="tv_selecCategoria">Selecciona categoría</string>
+    <string name="bt_salir">SALIR</string>
+    <string name="bt_ranking">RANKING</string>
 </resources>
