@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import net.iessochoa.suarpl.suarquizcodeapp.adapter.CategoryAdapter
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentHomeBinding
@@ -18,6 +19,9 @@ class HomeFragment : Fragment() {
     //Variables ViewBinding
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    //Variables RecyclerView, uso MutableList por si se
+    // implementa la compra de categorías ingame, en ese caso
+    // habría que aumentar los elementos
     private var qzCategoryMutableList: MutableList<QzCategory> = QzCategoryProvider.qzCategoryList.toMutableList()
     private val llmanager = LinearLayoutManager(context)
     private lateinit var adapter: CategoryAdapter
@@ -25,9 +29,14 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
 
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,17 +52,10 @@ class HomeFragment : Fragment() {
 
 
         binding.btLogout.setOnClickListener{
-            /*Construyendo AlertDialog para salir de la aplicación
-            al pulsar en botón salir*/
+
             //TODO IMPLEMENTAR CIERRE DE CONEXIÓN EN UN FUTURO
-            val salirDialog = AlertDialog.Builder(activity)
-            salirDialog.setMessage("¿Quieres salir de la aplicación ???")
-                .setCancelable(false)
-                .setPositiveButton("Sí") { _, _ -> exitProcess(0) }
-                .setNegativeButton("No") { dialog, _ -> dialog.cancel() }
-            val alert = salirDialog.create()
-            alert.setTitle("Dialog Header")
-            alert.show()
+            exitApp()
+
         }
 
         binding.btRanking.setOnClickListener {
@@ -64,16 +66,29 @@ class HomeFragment : Fragment() {
 
         }
 
-
-
     }
-
+    //Función para iniciar RecyclerView
     private fun initRecyclerView() {
         adapter = CategoryAdapter(
             qzCategoryList = qzCategoryMutableList
         )
+        //Se le asigna un layout y un adaptador
         binding.recyclerView.layoutManager = llmanager
         binding.recyclerView.adapter = adapter
+
+    }
+    /*
+    Construyendo AlertDialog para salir de la aplicación
+    */
+    private fun exitApp(){
+        val salirDialog = AlertDialog.Builder(activity)
+        salirDialog.setMessage("¿Quieres salir de la aplicación?")
+            .setCancelable(false)
+            .setPositiveButton("Sí") { _, _ -> exitProcess(0) }
+            .setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+        val alert = salirDialog.create()
+        alert.setTitle("Dialog Header")
+        alert.show()
 
     }
 

@@ -3,6 +3,7 @@ package net.iessochoa.suarpl.suarquizcodeapp.view
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentLoginBinding
+import kotlin.system.exitProcess
 
 
 class LoginFragment : Fragment() {
@@ -24,19 +26,28 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //ToDo IMPLEMENTAR CONFIRMACIÓN DE SALIDA
-        /*Asignando al botón back una acción personalizada para no volver al Splash
+        /*
+        Asignando al botón back una acción personalizada para no volver al Splash
+        y poder salir de la app
+         */
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                Toast.makeText(activity, "Test back", Toast.LENGTH_LONG).show()
+                val salirDialog = AlertDialog.Builder(activity)
+                salirDialog.setMessage("¿Quieres salir de la aplicación ???")
+                    .setCancelable(false)
+                    .setPositiveButton("Sí") { _, _ -> exitProcess(0) }
+                    .setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+                val alert = salirDialog.create()
+                alert.setTitle("Dialog Header")
+                alert.show()
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-        */
+
 
 
     }
-    //Metemos ViewBinding al fragment
+    //ViewBinding al fragment
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,17 +61,25 @@ class LoginFragment : Fragment() {
 
 
 
-        //Probando ViewBinding
+        //Probando ViewBinding con algunos eventos
 
         //TODO CAMBIAR ESTE LOGIN PROVISIONAL EN FIREBASE E INTEGRAR EN MVVM
         binding.tvRegister.setOnClickListener{
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
+        /*
+        Autenticación rudimentaria para dar funcionalidad al
+        wireframe, se implementará autenticación
+        desde Firebase auth/ROOM
+         */
         binding.buttonLogin.setOnClickListener{
             var password = binding.editTextTextPassword.text.toString()
             var mail = binding.editTextTextEmailAddress.text.toString()
 
+
+
             if (mail == "suar@prueba.com" && password == "1234"){
+            //if (mail.isValidEmail() && password == "1234"){
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }else{
                 Toast.makeText(activity, "Usuario no registrado", Toast.LENGTH_LONG).show()
@@ -69,4 +88,11 @@ class LoginFragment : Fragment() {
         }
 
     }
+    /*
+    Validador usando API de Google, pero no interesa por baja compatibilidad
+    de dispositivos
+     */
+
+    fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
 }
