@@ -7,16 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import net.iessochoa.suarpl.suarquizcodeapp.adapter.CategoryAdapter
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentHomeBinding
+import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategory
+import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProvider
 import kotlin.system.exitProcess
 
 class HomeFragment : Fragment() {
     //Variables ViewBinding
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private var qzCategoryMutableList: MutableList<QzCategory> = QzCategoryProvider.qzCategoryList.toMutableList()
+    private val llmanager = LinearLayoutManager(context)
+    private lateinit var adapter: CategoryAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
 
@@ -30,6 +39,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
+
 
         binding.btLogout.setOnClickListener{
             /*Construyendo AlertDialog para salir de la aplicación
@@ -50,7 +61,20 @@ class HomeFragment : Fragment() {
             //TODO FEATURE OPCIONAL, IMPLEMENTAR SI DA TIEMPO
             Toast.makeText(activity, "Feature opcional, aún no implementada", Toast.LENGTH_LONG).show()
 
+
         }
 
+
+
     }
+
+    private fun initRecyclerView() {
+        adapter = CategoryAdapter(
+            qzCategoryList = qzCategoryMutableList
+        )
+        binding.recyclerView.layoutManager = llmanager
+        binding.recyclerView.adapter = adapter
+
+    }
+
 }

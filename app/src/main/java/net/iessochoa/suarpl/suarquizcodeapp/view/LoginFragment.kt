@@ -34,6 +34,7 @@ class LoginFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
         */
 
+
     }
     //Metemos ViewBinding al fragment
     override fun onCreateView(

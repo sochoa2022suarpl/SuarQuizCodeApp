@@ -25,4 +25,5 @@
     <string name="tv_selecCategoria">Selecciona categoría</string>
     <string name="bt_salir">SALIR</string>
     <string name="bt_ranking">RANKING</string>
+    <string name="tvSelecLenguaje">Selecciona lenguaje</string>
 </resources>
