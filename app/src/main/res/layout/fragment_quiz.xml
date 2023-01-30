@@ -1,14 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frQuiz"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.QuizFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:background="@color/Lavender"
+    tools:context=".view.QuizFragment" >
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tvTituloCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/tvTituloCategory"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvTitPregunta"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tvCurrentPreg"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/Black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPregunta"
+        app:layout_constraintStart_toEndOf="@+id/tvTitPregunta"
+        android:text="@string/tvCurrentPreg" />
+
+    <TextView
+        android:id="@+id/tvPregunta"
+        android:layout_width="374dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="100dp"
+        android:maxLines="4"
+        android:text="@string/tvPregunta"
+        android:textAlignment="center"
+        android:textColor="@color/Indigo"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:background="@android:drawable/editbox_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/timer"
+        app:layout_constraintBottom_toTopOf="@+id/tvPregunta"
+        app:layout_constraintEnd_toStartOf="@+id/tvTimer"
+        app:layout_constraintStart_toEndOf="@+id/tvTotalPregunta" />
+
+    <TextView
+        android:id="@+id/tvTitPregunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/Black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPregunta"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/tvTitPregunta" />
+
+    <TextView
+        android:id="@+id/tvTotalPregunta"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/Black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPregunta"
+        app:layout_constraintStart_toEndOf="@+id/tvDe"
+        android:text="@string/tvTotalPregunta" />
+
+    <TextView
+        android:id="@+id/tvDe"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/Black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPregunta"
+        app:layout_constraintStart_toEndOf="@+id/tvCurrentPreg"
+        android:text="@string/tvDe" />
+
+    <TextView
+        android:id="@+id/tvTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPregunta"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/tvTimer" />
+
+    <Button
+        android:id="@+id/bt_Respuesta1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPregunta"
+        android:text="@string/bt_Respuesta1" />
+
+    <Button
+        android:id="@+id/bt_Respuesta2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_Respuesta1"
+        android:text="@string/bt_Respuesta2" />
+    <Button
+        android:id="@+id/bt_Respuesta3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_Respuesta2"
+        android:text="@string/bt_Respuesta3" />
+    <Button
+        android:id="@+id/bt_Respuesta4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_Respuesta3"
+        android:text="@string/bt_Respuesta4" />
+
+    <Button
+        android:id="@+id/btVolverHome"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/bt_salir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

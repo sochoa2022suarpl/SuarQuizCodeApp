@@ -1,5 +1,10 @@
 package net.iessochoa.suarpl.suarquizcodeapp.model
 
+/*
+Provider/repositorio provisional de la lista de
+categorías para aportar funcionalidad al wirefreame,
+en un futuro se obtendrán de una BD
+*/
 class QzCategoryProvider {
     companion object{
         val qzCategoryList = listOf<QzCategory>(
@@ -13,23 +18,23 @@ class QzCategoryProvider {
             ),
             QzCategory(
                 "Hola",
-                "KOTLIN"
+                "REACT"
             ),
             QzCategory(
                 "Hola",
-                "KOTLIN"
+                "TYPESCRYPT"
             ),
             QzCategory(
                 "Hola",
-                "KOTLIN"
+                "GIT"
             ),
             QzCategory(
                 "Hola",
-                "KOTLIN"
+                "HTML"
             ),
             QzCategory(
                 "Hola",
-                "KOTLIN"
+                "CSS"
             ),
         )
     }

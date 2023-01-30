@@ -46,6 +46,12 @@
         <action
             android:id="@+id/action_quizFragment_to_resultsFragment"
             app:destination="@id/resultsFragment" />
+        <action
+            android:id="@+id/action_quizFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="secondsLeft"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/resultsFragment"
