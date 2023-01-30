@@ -30,13 +30,16 @@
     <string name="tvTituloCategory">KOTLIN</string>
 
     <string name="tvCurrentPreg">1</string>
-    <string name="tvPregunta">¿Con qué nombre se conoce el fname en el siguiente código: fun myFunction(fname: String)?</string>
+    <string name="tvPregunta">¿Qué representa "fname" en el siguiente código: fun myFunction(fname: String)?</string>
     <string name="tvTitPregunta">Pregunta</string>
-    <string name="tvTotalPregunta">12</string>
+    <string name="tvTotalPregunta">1</string>
     <string name="tvDe">de</string>
     <string name="tvTimer">100</string>
     <string name="bt_Respuesta1">Respuesta 1</string>
     <string name="bt_Respuesta2">Respuesta 2</string>
     <string name="bt_Respuesta3">Respuesta 3</string>
     <string name="bt_Respuesta4">Respuesta 4</string>
+    <string name="tvFallidas">Respuestas fallidas:</string>
+    <string name="tvDificultad">Multiplicador por dificultad:</string>
+    <string name="tvTotal">Total</string>
 </resources>

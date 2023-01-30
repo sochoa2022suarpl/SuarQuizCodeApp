@@ -13,6 +13,7 @@ import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentTestBinding
 import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategory
 import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProvider
 
+//Fragmento usado como PlayGround para integrar unidades funcionales
 class TestFragment : Fragment() {
     //Variables ViewBinding
     private var _binding: FragmentTestBinding? = null
@@ -20,7 +21,6 @@ class TestFragment : Fragment() {
     private var qzCategoryMutableList: MutableList<QzCategory> = QzCategoryProvider.qzCategoryList.toMutableList()
     private val llmanager = LinearLayoutManager(context)
     private lateinit var adapter:CategoryAdapter
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -51,6 +51,14 @@ class QuizFragment : Fragment() {
         binding.btVolverHome.setOnClickListener {
             findNavController().navigate(R.id.action_quizFragment_to_homeFragment)
         }
+
+        binding.btRespuesta1.setOnClickListener {
+            findNavController().navigate(R.id.action_quizFragment_to_resultsFragment)
+        }
     }
+
+
+    /*ToDo implementar toda la lógica del cuestionario
+       cuando se integre el resto de modelos, adaptadores y repositorios*/
 
 }

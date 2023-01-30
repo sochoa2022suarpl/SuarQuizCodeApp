@@ -10,17 +10,17 @@ import androidx.navigation.fragment.findNavController
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentLoginBinding
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentRegisterBinding
-
+/*
+ToDo implementar registro usando BD Firebase/ROOM
+ */
 
 class RegisterFragment : Fragment() {
     //Variables ViewBinding
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(

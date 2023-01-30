@@ -23,7 +23,6 @@ class LoginFragment : Fragment() {
     private var _binding:FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /*
@@ -43,10 +42,8 @@ class LoginFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-
-
-
     }
+
     //ViewBinding al fragment
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,14 +56,11 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        //Probando ViewBinding con algunos eventos
-
-        //TODO CAMBIAR ESTE LOGIN PROVISIONAL EN FIREBASE E INTEGRAR EN MVVM
         binding.tvRegister.setOnClickListener{
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
+
+        //TODO CAMBIAR ESTE LOGIN PROVISIONAL EN FIREBASE E INTEGRAR EN MVVM
         /*
         Autenticación rudimentaria para dar funcionalidad al
         wireframe, se implementará autenticación
@@ -76,23 +70,18 @@ class LoginFragment : Fragment() {
             var password = binding.editTextTextPassword.text.toString()
             var mail = binding.editTextTextEmailAddress.text.toString()
 
-
-
             if (mail == "suar@prueba.com" && password == "1234"){
             //if (mail.isValidEmail() && password == "1234"){
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }else{
                 Toast.makeText(activity, "Usuario no registrado", Toast.LENGTH_LONG).show()
             }
-
         }
-
     }
     /*
-    Validador usando API de Google, pero no interesa por baja compatibilidad
+    Validador usando API de Google, pero no interesa por menor compatibilidad
     de dispositivos
      */
-
     fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 }
