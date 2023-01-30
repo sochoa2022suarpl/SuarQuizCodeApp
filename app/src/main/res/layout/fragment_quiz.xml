@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     android:background="@color/Lavender"
     tools:context=".view.QuizFragment" >
+    <TextView
+        android:id="@+id/tvTituloCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/tvTituloCategory"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvTitPregunta"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvCurrentPreg"
@@ -18,19 +28,23 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/tvPregunta"
         app:layout_constraintStart_toEndOf="@+id/tvTitPregunta"
-        tools:text="1" />
+        android:text="@string/tvCurrentPreg" />
 
     <TextView
         android:id="@+id/tvPregunta"
         android:layout_width="374dp"
         android:layout_height="127dp"
         android:layout_marginTop="100dp"
+        android:maxLines="4"
+        android:text="@string/tvPregunta"
+        android:textAlignment="center"
         android:textColor="@color/Indigo"
-        android:textSize="18sp"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:background="@android:drawable/editbox_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="¿Es esto un ejemplo de pregunta?" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -54,7 +68,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/tvPregunta"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Pregunta" />
+        android:text="@string/tvTitPregunta" />
 
     <TextView
         android:id="@+id/tvTotalPregunta"
@@ -66,7 +80,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/tvPregunta"
         app:layout_constraintStart_toEndOf="@+id/tvDe"
-        tools:text="12" />
+        android:text="@string/tvTotalPregunta" />
 
     <TextView
         android:id="@+id/tvDe"
@@ -78,7 +92,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/tvPregunta"
         app:layout_constraintStart_toEndOf="@+id/tvCurrentPreg"
-        tools:text="de" />
+        android:text="@string/tvDe" />
 
     <TextView
         android:id="@+id/tvTimer"
@@ -89,7 +103,7 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/tvPregunta"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="10" />
+        android:text="@string/tvTimer" />
 
     <Button
         android:id="@+id/bt_Respuesta1"
@@ -101,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPregunta"
-        tools:text="Respuesta 1" />
+        android:text="@string/bt_Respuesta1" />
 
     <Button
         android:id="@+id/bt_Respuesta2"
@@ -113,7 +127,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_Respuesta1"
-        tools:text="Respuesta 2" />
+        android:text="@string/bt_Respuesta2" />
     <Button
         android:id="@+id/bt_Respuesta3"
         android:layout_width="0dp"
@@ -124,7 +138,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_Respuesta2"
-        tools:text="Respuesta 3" />
+        android:text="@string/bt_Respuesta3" />
     <Button
         android:id="@+id/bt_Respuesta4"
         android:layout_width="0dp"
@@ -135,7 +149,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_Respuesta3"
-        tools:text="Respuesta 4" />
+        android:text="@string/bt_Respuesta4" />
 
     <Button
         android:id="@+id/btVolverHome"
@@ -147,15 +161,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tvTituloCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
-        tools:text="KOTLIN"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvTitPregunta"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

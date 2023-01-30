@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_200"
@@ -34,7 +35,7 @@
         android:id="@+id/imageView3"
         android:layout_width="77dp"
         android:layout_height="54dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="26dp"
         android:src="@drawable/token"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,41 +78,44 @@
 
     <RadioGroup
         android:id="@+id/rgDifficulty"
-        android:layout_width="260dp"
-        android:layout_height="60dp"
+        android:layout_width="259dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="36dp"
         android:orientation="horizontal"
+        android:background="@drawable/radiusgreen"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="@string/rb_facil" />
-
-        <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/rbNormal"
             android:layout_width="120dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:checked="true"
             android:text="@string/rb_normal" />
+
+        <RadioButton
+            android:id="@+id/rbDificil"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="@string/rb_dificil" />
     </RadioGroup>
 
     <TextView
         android:id="@+id/tv_dificultad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:text="@string/tv_dificultad"
         android:textColor="@color/Black"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/rgDifficulty"
+        app:layout_constraintHorizontal_bias="0.392"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
@@ -123,7 +127,7 @@
         android:layout_marginTop="12dp"
         android:text="@string/tv_selecCategoria"
         android:textColor="@color/Black"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rgDifficulty" />
 
