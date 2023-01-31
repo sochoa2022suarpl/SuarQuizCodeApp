@@ -42,4 +42,5 @@
     <string name="tvFallidas">Respuestas fallidas:</string>
     <string name="tvDificultad">Multiplicador por dificultad:</string>
     <string name="tvTotal">Total</string>
+    <string name="tvUsuario">Usuario</string>
 </resources>

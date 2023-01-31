@@ -116,12 +116,16 @@ class HomeFragment : Fragment() {
     //Función para iniciar RecyclerView
     private fun initRecyclerView() {
         adapter = CategoryAdapter(
-            qzCategoryList = qzCategoryMutableList
+            qzCategoryList = qzCategoryMutableList,
+            onClickListener = {QzCategory -> onItemselected(QzCategory)}
         )
         //Se le asigna un layout y un adaptador
         binding.recyclerView.layoutManager = llmanager
         binding.recyclerView.adapter = adapter
 
+    }
+    private fun onItemselected(quizCategory:QzCategory){
+        Toast.makeText(this.context, quizCategory.catName, Toast.LENGTH_SHORT).show()
     }
 
     /*
