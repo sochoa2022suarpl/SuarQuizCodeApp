@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ivSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-40dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvSplashDevelop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
@@ -31,5 +31,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/ivSplash" />
 </androidx.constraintlayout.widget.ConstraintLayout>
