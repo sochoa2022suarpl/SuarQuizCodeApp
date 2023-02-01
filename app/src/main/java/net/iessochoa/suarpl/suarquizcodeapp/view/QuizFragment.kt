@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -18,6 +17,7 @@ import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentQuizBinding
 import net.iessochoa.suarpl.suarquizcodeapp.model.QuestionModel
 import net.iessochoa.suarpl.suarquizcodeapp.model.QuestionModelProvider
+import net.iessochoa.suarpl.suarquizcodeapp.viewmodel.QuestionViewModel
 
 class QuizFragment : Fragment() {
     //Variables ViewBinding
@@ -32,6 +32,10 @@ class QuizFragment : Fragment() {
     private var currentQuestionNumber: Int = 0
     //Valor de la respuesta actual
     private var answer : String =""
+    //Variable para recuperar categoría seleccionada en home
+    private lateinit var selectedCategory : String
+    //ViewModel
+    private val questionViewModel : QuestionViewModel by viewModels()
 
     private var questionModelList : List<QuestionModel> = QuestionModelProvider.questionModelProviderList.shuffled()
 
@@ -43,6 +47,7 @@ class QuizFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
     }
 
     override fun onCreateView(
@@ -55,35 +60,25 @@ class QuizFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        //Recuperamos la categoría seleccionada en el RecyclerView
+        loadCategory()
+        //Cargamos las preguntas usando el ViewModel/LiveData
+        loadQuestions(currentQuestionNumber)
         //Iniciamos temporizador
         startTimerQuiz()
-        loadQuestions(currentQuestionNumber)
+        //Seteamos la comprobación de respuestas en los botones correspondientes
+        setButtonBindCheck()
 
-        binding.btRespuesta1.setOnClickListener{checkAnswer(binding.btRespuesta1)}
-        binding.btRespuesta2.setOnClickListener{checkAnswer(binding.btRespuesta2)}
-        binding.btRespuesta3.setOnClickListener{checkAnswer(binding.btRespuesta3)}
-        binding.btRespuesta4.setOnClickListener{checkAnswer(binding.btRespuesta4)}
-
+        //Binds onclick
         binding.btVolverHome.setOnClickListener {
             findNavController().navigate(R.id.action_quizFragment_to_homeFragment)
             timer.cancel()
         }
-
-        /*binding.btRespuesta1.setOnClickListener {
-            findNavController().navigate(R.id.action_quizFragment_to_resultsFragment)
-        }*/
-
-
-
-
-
-
     }
-
+    //Método comprobación de respuestas
     private fun checkAnswer(button: Button) {
         if (button.text==answer){
-            Toast.makeText(activity, "Respuesta correcta loquete", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Respuesta correcta ", Toast.LENGTH_SHORT).show()
             if (currentQuestionNumber<questionModelList.size-1){
                 currentQuestionNumber++
                 loadQuestions(currentQuestionNumber)
@@ -91,15 +86,10 @@ class QuizFragment : Fragment() {
                 Toast.makeText(activity, "Se acabó el cuestionario", Toast.LENGTH_SHORT).show()
                 timer.cancel()
                 findNavController().navigate(R.id.action_quizFragment_to_resultsFragment)
-
             }
-
         }else{
-            Toast.makeText(activity, "Eres mu tonto", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Respuesta Incorrecta", Toast.LENGTH_SHORT).show()
         }
-
-
-
     }
 
     /*
@@ -114,25 +104,36 @@ class QuizFragment : Fragment() {
             override fun onTick(millisUntilFinished: Long) {
                 binding.tvTimer.text = (millisUntilFinished/1000).toString()
             }
-
             override fun onFinish() {
                 Toast.makeText(activity, "Se acabó el tiempo!!", Toast.LENGTH_SHORT).show()
             }
-
         }.start()
-
-
     }
+
+    //Método para cargar pregunta/respuestas usando ViewModel/LiveData
     fun loadQuestions(int: Int){
+        questionViewModel.getLiveDataFromCategory(selectedCategory).observe(viewLifecycleOwner, Observer {
+            var i = int
+            answer = it[i].answer
+            binding.tvPregunta.text = it[i].question
+            binding.btRespuesta1.text = it[i].option1
+            binding.btRespuesta2.text = it[i].option2
+            binding.btRespuesta3.text = it[i].option3
+            binding.btRespuesta4.text = it[i].option4
+        })
+    }
 
-        var i = int
-        answer = questionModelList[i].answer
-        binding.tvPregunta.text = questionModelList[i].question
-        binding.btRespuesta1.text = questionModelList[i].option1
-        binding.btRespuesta2.text = questionModelList[i].option2
-        binding.btRespuesta3.text = questionModelList[i].option3
-        binding.btRespuesta4.text = questionModelList[i].option4
+    //Método para recuperar categoría seleccionada por safeargs
+    fun loadCategory(){
+        selectedCategory = args.category
+    }
 
+    //Asignación de comprobación de respuestas a botones
+    fun setButtonBindCheck(){
+        binding.btRespuesta1.setOnClickListener{checkAnswer(binding.btRespuesta1)}
+        binding.btRespuesta2.setOnClickListener{checkAnswer(binding.btRespuesta2)}
+        binding.btRespuesta3.setOnClickListener{checkAnswer(binding.btRespuesta3)}
+        binding.btRespuesta4.setOnClickListener{checkAnswer(binding.btRespuesta4)}
     }
 
 

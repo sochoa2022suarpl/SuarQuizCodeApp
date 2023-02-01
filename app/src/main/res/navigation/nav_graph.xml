@@ -52,6 +52,9 @@
         <argument
             android:name="secondsLeft"
             app:argType="integer" />
+        <argument
+            android:name="category"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/resultsFragment"

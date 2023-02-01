@@ -38,6 +38,9 @@ class HomeFragment : Fragment() {
     //Segundos restantes que luego pasaremos al fragmento del cuestionario
     private var secondsLeft: Int = 100
 
+    //String que pasamos para identificar el cuestionario
+    private var quizCategoryString :String = "JAVA"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val callback = object : OnBackPressedCallback(true) {
@@ -79,7 +82,7 @@ class HomeFragment : Fragment() {
         */
         binding.apply {
             binding.btRanking.setOnClickListener {
-                val next = HomeFragmentDirections.actionHomeFragmentToQuizFragment(secondsLeft)
+                val next = HomeFragmentDirections.actionHomeFragmentToQuizFragment(secondsLeft, quizCategoryString)
                 findNavController().navigate(next)
             }
         }
@@ -125,7 +128,17 @@ class HomeFragment : Fragment() {
 
     }
     private fun onItemselected(quizCategory:QzCategory){
-        Toast.makeText(this.context, quizCategory.catName, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this.context, quizCategory.catName, Toast.LENGTH_SHORT).show()
+        var selected = quizCategory.catName
+
+        when (selected){
+            "KOTLIN" -> quizCategoryString = "KOTLIN"
+            "JAVA" -> quizCategoryString = "JAVA"
+        }
+        binding.apply {
+            val next = HomeFragmentDirections.actionHomeFragmentToQuizFragment(secondsLeft, quizCategoryString)
+            findNavController().navigate(next)
+        }
     }
 
     /*

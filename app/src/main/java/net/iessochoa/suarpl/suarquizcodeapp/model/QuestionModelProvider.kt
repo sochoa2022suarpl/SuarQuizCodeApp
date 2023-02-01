@@ -31,6 +31,30 @@ class QuestionModelProvider {
             )
         )
         val  questionModelProviderListJava = listOf<QuestionModel>(
+            QuestionModel(
+                "¿prueba JAVA?",
+                "//este es un comentario",
+                "- - Esto es un comentario",
+                "/* Esto es un comentario",
+                "# Esto es un comentario",
+                "//este es un comentario"
+            ),
+            QuestionModel(
+                "¿prueba JAVA?",
+                "val num = 5",
+                "num = 5",
+                "int num = 5",
+                "num = 5 int",
+                "val num = 5"
+            ),
+            QuestionModel(
+                "¿prueba JAVA?",
+                "==",
+                "=",
+                "<>",
+                "><",
+                "=="
+            )
 
 
         )
