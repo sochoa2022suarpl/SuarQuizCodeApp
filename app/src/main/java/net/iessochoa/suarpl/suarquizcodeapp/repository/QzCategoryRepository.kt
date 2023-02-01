@@ -1,6 +1,6 @@
 package net.iessochoa.suarpl.suarquizcodeapp.repository
 
-//Obtiene colección de categorías
+//Obtiene colección de categorías desde BD ROOM o FB
 class QzCategoryRepository {
 
     //Variables onFirestoreTaskComplete, firebaseFirestore , reference
