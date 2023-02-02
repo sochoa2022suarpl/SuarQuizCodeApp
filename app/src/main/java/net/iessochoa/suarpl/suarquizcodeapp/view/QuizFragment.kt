@@ -161,8 +161,17 @@ class QuizFragment : Fragment() {
                 "Se acabó el cuestionario, ACERTADAS: $rightAnswers FALLIDAS: $wrongAnswers", Toast.LENGTH_LONG).show()
             timer.cancel()
             canAnswer=false
-            findNavController().navigate(R.id.action_quizFragment_to_resultsFragment)
+            goToResults()
         }
+    }
+
+    //Ir al Fragment resultado pasando argumentos
+    fun goToResults(){
+        binding.apply {
+            val next = QuizFragmentDirections.actionQuizFragmentToResultsFragment(secsLeft,rightAnswers,wrongAnswers)
+            findNavController().navigate(next)
+        }
+
     }
 
 

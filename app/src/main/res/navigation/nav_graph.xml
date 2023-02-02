@@ -64,6 +64,15 @@
         <action
             android:id="@+id/action_resultsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="secondsBonus"
+            app:argType="integer" />
+        <argument
+            android:name="resRight"
+            app:argType="integer" />
+        <argument
+            android:name="resWrong"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
