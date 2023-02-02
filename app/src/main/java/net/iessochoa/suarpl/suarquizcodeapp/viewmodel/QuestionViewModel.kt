@@ -10,7 +10,7 @@ class QuestionViewModel: ViewModel() {
 
     private var questionModelListData = MutableLiveData<List<QuestionModel>>()
 
-    //Selecciona una lista de objetos dependiendo de la categoría seleccionada, provisional hasta integrar Repositorio
+    //Obtiene una lista de objetos dependiendo de la categoría seleccionada, provisional hasta integrar Repositorio
     fun getLiveDataFromCategory(selectedCategory: String): MutableLiveData<List<QuestionModel>>{
         when(selectedCategory){
             "KOTLIN" -> questionModelListData = MutableLiveData<List<QuestionModel>>(QuestionModelProvider.questionModelProviderList)

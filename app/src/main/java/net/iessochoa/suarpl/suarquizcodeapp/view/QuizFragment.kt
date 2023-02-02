@@ -34,6 +34,12 @@ class QuizFragment : Fragment() {
     private var answer : String =""
     //Variable para recuperar categoría seleccionada en home
     private lateinit var selectedCategory : String
+    //Booleana para poder contestar
+    var canAnswer : Boolean = false
+    //Recuento de aciertos/errores
+    var rightAnswers : Int = 0
+    var wrongAnswers : Int = 0
+
     //ViewModel
     private val questionViewModel : QuestionViewModel by viewModels()
 
@@ -78,18 +84,13 @@ class QuizFragment : Fragment() {
     //Método comprobación de respuestas
     private fun checkAnswer(button: Button) {
         if (button.text==answer){
+            rightAnswers++
             Toast.makeText(activity, "Respuesta correcta ", Toast.LENGTH_SHORT).show()
-            if (currentQuestionNumber<questionModelList.size-1){
-                currentQuestionNumber++
-                loadQuestions(currentQuestionNumber)
-            } else{
-                Toast.makeText(activity, "Se acabó el cuestionario", Toast.LENGTH_SHORT).show()
-                timer.cancel()
-                findNavController().navigate(R.id.action_quizFragment_to_resultsFragment)
-            }
         }else{
+            wrongAnswers++
             Toast.makeText(activity, "Respuesta Incorrecta", Toast.LENGTH_SHORT).show()
         }
+        nextQuestion()
     }
 
     /*
@@ -115,12 +116,18 @@ class QuizFragment : Fragment() {
         questionViewModel.getLiveDataFromCategory(selectedCategory).observe(viewLifecycleOwner, Observer {
             var i = int
             answer = it[i].answer
+            //Pregunta y botones
             binding.tvPregunta.text = it[i].question
             binding.btRespuesta1.text = it[i].option1
             binding.btRespuesta2.text = it[i].option2
             binding.btRespuesta3.text = it[i].option3
             binding.btRespuesta4.text = it[i].option4
+            //Elementos UI, contador de preguntas
+            binding.tvCurrentPreg.text = (i+1).toString()
+            binding.tvTotalPregunta.text = it.size.toString()
+
         })
+        canAnswer = true
     }
 
     //Método para recuperar categoría seleccionada por safeargs
@@ -130,10 +137,32 @@ class QuizFragment : Fragment() {
 
     //Asignación de comprobación de respuestas a botones
     fun setButtonBindCheck(){
-        binding.btRespuesta1.setOnClickListener{checkAnswer(binding.btRespuesta1)}
-        binding.btRespuesta2.setOnClickListener{checkAnswer(binding.btRespuesta2)}
-        binding.btRespuesta3.setOnClickListener{checkAnswer(binding.btRespuesta3)}
-        binding.btRespuesta4.setOnClickListener{checkAnswer(binding.btRespuesta4)}
+        if(canAnswer==true){
+            binding.btRespuesta1.setOnClickListener{checkAnswer(binding.btRespuesta1)}
+            binding.btRespuesta2.setOnClickListener{checkAnswer(binding.btRespuesta2)}
+            binding.btRespuesta3.setOnClickListener{checkAnswer(binding.btRespuesta3)}
+            binding.btRespuesta4.setOnClickListener{checkAnswer(binding.btRespuesta4)}
+        }else{
+
+        }
+
+    }
+    fun setDefaults(){
+        rightAnswers = 0
+        wrongAnswers = 0
+
+    }
+    fun nextQuestion(){
+        if (currentQuestionNumber<questionModelList.size-1){
+            currentQuestionNumber++
+            loadQuestions(currentQuestionNumber)
+        } else{
+            Toast.makeText(activity,
+                "Se acabó el cuestionario, ACERTADAS: $rightAnswers FALLIDAS: $wrongAnswers", Toast.LENGTH_LONG).show()
+            timer.cancel()
+            canAnswer=false
+            findNavController().navigate(R.id.action_quizFragment_to_resultsFragment)
+        }
     }
 
 
