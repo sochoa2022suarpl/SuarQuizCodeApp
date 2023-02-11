@@ -67,14 +67,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="391dp"
-        android:layout_height="323dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="396dp"
+        android:layout_height="316dp"
         android:background="#7B787C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/etFilterCat"
         tools:listitem="@layout/item_category" />
 
     <RadioGroup
@@ -125,7 +124,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:text="@string/tv_selecCategoria"
         android:textColor="@color/Black"
         android:textSize="20sp"
@@ -161,5 +160,20 @@
         android:text="@string/bt_ranking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <EditText
+        android:id="@+id/etFilterCat"
+        android:layout_width="283dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:imeOptions="actionDone"
+        android:hint="@string/etFiltrarCateHint"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/rgDifficulty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

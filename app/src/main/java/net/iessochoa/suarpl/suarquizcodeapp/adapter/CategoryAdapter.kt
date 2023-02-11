@@ -31,10 +31,7 @@ class CategoryAdapter(
      */
     override fun getItemCount(): Int =qzCategoryList.size
 
-    /*
-    La dejamos por si queremos meter luego un observer
-    que actualice los posibles cambios en la lista
-     */
+   //Notifica los cambios en la lista de categorías
     fun updateQuizList(qzCategoryList: List<QzCategory>){
         this.qzCategoryList = qzCategoryList
         notifyDataSetChanged()
