@@ -9,10 +9,6 @@ class QzCategoryProvider {
     companion object{
         val qzCategoryList = listOf<QzCategory>(
             QzCategory(
-                "https://logospng.org/download/java/logo-java-256.png",
-                "JAVA"
-            ),
-            QzCategory(
                 "https://cdn.iconscout.com/icon/free/png-256/kotlin-2038873-1720086.png",
                 "KOTLIN"
             ),
@@ -36,6 +32,10 @@ class QzCategoryProvider {
                 "https://logospng.org/download/css-3/logo-css-3-256.png",
                 "CSS"
             ),
+            QzCategory(
+                "https://logospng.org/download/java/logo-java-256.png",
+                "JAVA"
+            )
         )
     }
 }

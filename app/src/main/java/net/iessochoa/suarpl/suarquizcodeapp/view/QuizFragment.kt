@@ -43,7 +43,7 @@ class QuizFragment : Fragment() {
     //ViewModel
     private val questionViewModel : QuestionViewModel by viewModels()
 
-    private var questionModelList : List<QuestionModel> = QuestionModelProvider.questionModelProviderList.shuffled()
+    private var questionModelList : List<QuestionModel> = QuestionModelProvider.questionModelProviderListKotlin.shuffled()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

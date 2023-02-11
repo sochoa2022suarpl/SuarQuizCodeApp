@@ -134,6 +134,7 @@ class HomeFragment : Fragment() {
         when (selected){
             "KOTLIN" -> quizCategoryString = "KOTLIN"
             "JAVA" -> quizCategoryString = "JAVA"
+            "REACT" -> quizCategoryString = "REACT"
         }
         binding.apply {
             val next = HomeFragmentDirections.actionHomeFragmentToQuizFragment(secondsLeft, quizCategoryString)
