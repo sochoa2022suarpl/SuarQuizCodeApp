@@ -35,6 +35,8 @@ _Las herramientas utilizadas para la creación del proyecto son:_
 ## Vídeo demostrativo (Entrega 1 - UI) ✒️
 
 * [Youtube](https://youtu.be/vQqhkbQEXkY)
+<video src='https://youtu.be/vQqhkbQEXkY' width=180/>
+* [Youtube](https://youtu.be/K0vA10X1eYs)
 
 ## Autores ✒️
 
