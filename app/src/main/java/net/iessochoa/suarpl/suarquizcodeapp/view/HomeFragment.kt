@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -38,6 +39,9 @@ class HomeFragment : Fragment() {
     //Segundos restantes que luego pasaremos al fragmento del cuestionario
     private var secondsLeft: Int = 100
 
+    //String que pasamos para identificar el cuestionario
+    private var quizCategoryString :String = "JAVA"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val callback = object : OnBackPressedCallback(true) {
@@ -45,6 +49,7 @@ class HomeFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
     }
 
     override fun onCreateView(
@@ -60,29 +65,23 @@ class HomeFragment : Fragment() {
         initRecyclerView()
 
         binding.btLogout.setOnClickListener {
-
             //Salir
             exitApp()
         }
-        /*
+        //añadimos listener al filtro de categorías, y filtramos la lista
+        binding.etFilterCat.addTextChangedListener {userFilter ->
+            //la almacenamos en una constante, usamos lowerkeys para ignorar diferencias entre mays/mins
+            val qzCategoryListFiltered = qzCategoryMutableList.filter { qzCategory -> qzCategory.catName.lowercase().contains(userFilter.toString().lowercase())}
+            //llamamos al método del adaptador que actualiza la lista de categorías
+            adapter.updateQuizList(qzCategoryListFiltered)
+        }
+
         binding.btRanking.setOnClickListener {
             //Mostrar el ranking
             //ToDo FEATURE OPCIONAL, IMPLEMENTAR SI DA TIEMPO
             Toast.makeText(activity, "Feature opcional, aún no implementada", Toast.LENGTH_LONG).show()
         }
-         */
 
-        /*Navegación provisional al siguiente fragment en este botón hasta el fragmento cuestionario
-        hasta integrar
-        onclicklistener en las diferentes opciones de la MutableList y la BD. Mediante safeargs
-        pasamos el valor de los segundos restantes al siguiente fragmento
-        */
-        binding.apply {
-            binding.btRanking.setOnClickListener {
-                val next = HomeFragmentDirections.actionHomeFragmentToQuizFragment(secondsLeft)
-                findNavController().navigate(next)
-            }
-        }
         /*
         Al cambiar la dificultad con los radiobuttons, cambia el color
         del radiobutton y cambia la variable que contiene los segundos restantes
@@ -116,12 +115,27 @@ class HomeFragment : Fragment() {
     //Función para iniciar RecyclerView
     private fun initRecyclerView() {
         adapter = CategoryAdapter(
-            qzCategoryList = qzCategoryMutableList
+            qzCategoryList = qzCategoryMutableList,
+            onClickListener = {QzCategory -> onItemselected(QzCategory)}
         )
         //Se le asigna un layout y un adaptador
         binding.recyclerView.layoutManager = llmanager
         binding.recyclerView.adapter = adapter
 
+    }
+    private fun onItemselected(quizCategory:QzCategory){
+        //Toast.makeText(this.context, quizCategory.catName, Toast.LENGTH_SHORT).show()
+        var selected = quizCategory.catName
+
+        when (selected){
+            "KOTLIN" -> quizCategoryString = "KOTLIN"
+            "JAVA" -> quizCategoryString = "JAVA"
+            "REACT" -> quizCategoryString = "REACT"
+        }
+        binding.apply {
+            val next = HomeFragmentDirections.actionHomeFragmentToQuizFragment(secondsLeft, quizCategoryString)
+            findNavController().navigate(next)
+        }
     }
 
     /*

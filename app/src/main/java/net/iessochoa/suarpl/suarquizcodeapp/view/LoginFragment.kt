@@ -37,7 +37,7 @@ class LoginFragment : Fragment() {
                     .setPositiveButton("Sí") { _, _ -> exitProcess(0) }
                     .setNegativeButton("No") { dialog, _ -> dialog.cancel() }
                 val alert = salirDialog.create()
-                alert.setTitle("Dialog Header")
+                alert.setTitle("Salir")
                 alert.show()
             }
         }

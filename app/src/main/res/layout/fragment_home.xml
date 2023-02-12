@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/imageUser"
-        android:layout_width="74dp"
-        android:layout_height="55dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/user"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvUsername"
         android:layout_width="220dp"
         android:layout_height="33dp"
         android:layout_marginStart="10dp"
@@ -29,14 +29,14 @@
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/imageUser"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Usuario" />
+        android:text="@string/tvUsuario" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/ivCoin"
         android:layout_width="77dp"
         android:layout_height="54dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/token"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageUser" />
@@ -50,11 +50,11 @@
         android:text="@string/tv_cantMonedas"
         android:textColor="@color/Black"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toEndOf="@+id/ivCoin"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvMonedas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -63,17 +63,17 @@
         android:textColor="@color/Black"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/tv_cantidadMonedas"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="391dp"
-        android:layout_height="323dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="396dp"
+        android:layout_height="316dp"
+        android:background="#7B787C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/etFilterCat"
         tools:listitem="@layout/item_category" />
 
     <RadioGroup
@@ -84,8 +84,8 @@
         android:layout_marginTop="36dp"
         android:orientation="horizontal"
         android:background="@drawable/radiusgreen"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintStart_toEndOf="@+id/ivCoin"
+        app:layout_constraintTop_toBottomOf="@+id/tvMonedas">
 
         <RadioButton
             android:id="@+id/rbNormal"
@@ -117,14 +117,14 @@
         app:layout_constraintEnd_toStartOf="@+id/rgDifficulty"
         app:layout_constraintHorizontal_bias="0.392"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/ivCoin" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:text="@string/tv_selecCategoria"
         android:textColor="@color/Black"
         android:textSize="20sp"
@@ -160,5 +160,20 @@
         android:text="@string/bt_ranking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <EditText
+        android:id="@+id/etFilterCat"
+        android:layout_width="283dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:imeOptions="actionDone"
+        android:hint="@string/etFiltrarCateHint"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/rgDifficulty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

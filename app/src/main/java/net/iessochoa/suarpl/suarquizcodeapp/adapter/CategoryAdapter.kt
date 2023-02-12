@@ -7,7 +7,8 @@ import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategory
 
 class CategoryAdapter(
-    private var qzCategoryList: List<QzCategory>
+    private var qzCategoryList: List<QzCategory>,
+    private val onClickListener: (QzCategory) -> Unit
 ) : RecyclerView.Adapter<CategoryViewHolder>(){
 
 
@@ -21,7 +22,7 @@ class CategoryAdapter(
      */
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = qzCategoryList[position]
-        holder.render(item)
+        holder.render(item, onClickListener)
 
     }
     /*
@@ -30,10 +31,7 @@ class CategoryAdapter(
      */
     override fun getItemCount(): Int =qzCategoryList.size
 
-    /*
-    La dejamos por si queremos meter luego un observer
-    que actualice los posibles cambios en la lista
-     */
+   //Notifica los cambios en la lista de categorías
     fun updateQuizList(qzCategoryList: List<QzCategory>){
         this.qzCategoryList = qzCategoryList
         notifyDataSetChanged()

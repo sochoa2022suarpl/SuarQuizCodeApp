@@ -22,7 +22,7 @@
     <string name="rb_dificil">Difícil</string>
     <string name="rb_normal">Normal</string>
     <string name="tv_dificultad">Dificultad</string>
-    <string name="tv_selecCategoria">Selecciona categoría</string>
+    <string name="tv_selecCategoria">Categoría</string>
     <string name="bt_salir">SALIR</string>
     <string name="bt_ranking">RANKING</string>
     <string name="tvSelecLenguaje">Selecciona lenguaje</string>
@@ -42,4 +42,6 @@
     <string name="tvFallidas">Respuestas fallidas:</string>
     <string name="tvDificultad">Multiplicador por dificultad:</string>
     <string name="tvTotal">Total</string>
+    <string name="tvUsuario">Usuario</string>
+    <string name="etFiltrarCateHint">Filtrar categoría</string>
 </resources>

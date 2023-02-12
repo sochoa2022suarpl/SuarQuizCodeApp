@@ -9,33 +9,33 @@ class QzCategoryProvider {
     companion object{
         val qzCategoryList = listOf<QzCategory>(
             QzCategory(
-                "Hola",
-                "JAVA"
-            ),
-            QzCategory(
-                "Hola",
+                "https://cdn.iconscout.com/icon/free/png-256/kotlin-2038873-1720086.png",
                 "KOTLIN"
             ),
             QzCategory(
-                "Hola",
+                "https://logospng.org/download/react/logo-react-256.png",
                 "REACT"
             ),
             QzCategory(
-                "Hola",
+                "https://logospng.org/download/typescript/typescript-256.png",
                 "TYPESCRYPT"
             ),
             QzCategory(
-                "Hola",
+                "https://logospng.org/download/git/git-256.png",
                 "GIT"
             ),
             QzCategory(
-                "Hola",
+                "https://logospng.org/download/html-5/logo-html-5-256.png",
                 "HTML"
             ),
             QzCategory(
-                "Hola",
+                "https://logospng.org/download/css-3/logo-css-3-256.png",
                 "CSS"
             ),
+            QzCategory(
+                "https://logospng.org/download/java/logo-java-256.png",
+                "JAVA"
+            )
         )
     }
 }
