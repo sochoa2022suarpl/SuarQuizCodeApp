@@ -34,8 +34,8 @@ _Las herramientas utilizadas para la creación del proyecto son:_
 
 ## Vídeo demostrativo (Entregas disponibles 2/2) ✒️
 
-* [Youtube](https://youtu.be/vQqhkbQEXkY)
-* [Youtube](https://youtu.be/K0vA10X1eYs)
+* [Entrega 1 - UI](https://youtu.be/vQqhkbQEXkY)
+* [Entrega 2 - MVVM](https://youtu.be/K0vA10X1eYs)
 
 ## Autores ✒️
 
