@@ -32,10 +32,9 @@ _Las herramientas utilizadas para la creación del proyecto son:_
 * [Vegas Pro](https://www.vegascreativesoftware.com/es/vegas-pro/) - Editor de vídeo , versión 19.0
 
 
-## Vídeo demostrativo (Entrega 1 - UI) ✒️
+## Vídeo demostrativo (Entregas disponibles 2/2) ✒️
 
 * [Youtube](https://youtu.be/vQqhkbQEXkY)
-<video src='https://youtu.be/vQqhkbQEXkY' width=180/>
 * [Youtube](https://youtu.be/K0vA10X1eYs)
 
 ## Autores ✒️
