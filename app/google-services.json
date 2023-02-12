@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "894248968689",
+    "project_id": "splcodequiz",
+    "storage_bucket": "splcodequiz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894248968689:android:65c37406b826b0fbb9e450",
+        "android_client_info": {
+          "package_name": "net.iessochoa.suarpl.suarquizcodeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894248968689-4q6h3f4patjcjpff448up5l1goovlm61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYDa0z8aydIChqFv-rnjWpux1K4lVlStc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894248968689-4q6h3f4patjcjpff448up5l1goovlm61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
