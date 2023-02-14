@@ -2,22 +2,19 @@ package net.iessochoa.suarpl.suarquizcodeapp.view
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentQuizBinding
-import net.iessochoa.suarpl.suarquizcodeapp.model.QuestionModel
-import net.iessochoa.suarpl.suarquizcodeapp.model.QuestionModelProvider
-import net.iessochoa.suarpl.suarquizcodeapp.repository.QuestionRepository
 import net.iessochoa.suarpl.suarquizcodeapp.viewmodel.QuestionViewModel
 
 class QuizFragment : Fragment() {
@@ -60,7 +57,7 @@ class QuizFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentQuizBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -115,7 +112,7 @@ class QuizFragment : Fragment() {
     //Método para cargar pregunta/respuestas usando ViewModel/LiveData/Repository desde Firebase
     fun loadQuestions(indice: Int){
         questionViewModel.getLiveDataFromCategory(selectedCategory).observe(viewLifecycleOwner, Observer {
-            var i = indice
+            val i = indice
             answer = it[i].answer.toString()
             //Pregunta y botones
             binding.tvPregunta.text = it[i].question.toString()
@@ -144,13 +141,8 @@ class QuizFragment : Fragment() {
             binding.btRespuesta3.setOnClickListener{checkAnswer(binding.btRespuesta3)}
             binding.btRespuesta4.setOnClickListener{checkAnswer(binding.btRespuesta4)}
         }else{
-
+            //No permite contestar
         }
-
-    }
-    fun setDefaults(){
-        rightAnswers = 0
-        wrongAnswers = 0
 
     }
     fun nextQuestion(){

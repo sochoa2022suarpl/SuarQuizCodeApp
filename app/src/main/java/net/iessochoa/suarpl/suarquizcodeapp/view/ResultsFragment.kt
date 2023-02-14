@@ -12,6 +12,10 @@ import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentResultsBinding
 
@@ -38,7 +42,7 @@ class ResultsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentResultsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -55,12 +59,12 @@ class ResultsFragment : Fragment() {
         rightAnswers = arg.resRight.toString()
         wrongAnswers = arg.resWrong.toString()
 
-
-
+        //Muestra resultados y actualiza las monedas en la BD
         showResults()
         getUserCoins()
         
     }
+    //Calcula la puntuación obtenida
     private fun showResults(){
         totalScore = rightAnswers.toInt()*100
         binding.tvAcertadas.text = rightAnswers
@@ -71,9 +75,9 @@ class ResultsFragment : Fragment() {
                 totalScore -= 100
             }
         }
-
         binding.tvCantidadMonedas.text = totalScore.toString()
     }
+    /*
     //Método que obtiene las monedas actuales del usuario logueado
     //Y le suma las ganadas
     private fun getUserCoins(){
@@ -96,11 +100,49 @@ class ResultsFragment : Fragment() {
             }
     }
 
+     */
+    //Método que obtiene las monedas actuales del usuario logueado en Firebase Auth
+    //Y le suma las ganadas, usando coroutines
+    private fun getUserCoins() {
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val docRef = db.collection("users").document(currentUser)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val document = docRef.get().await()
+                if (document.get("coins") != null) {
+                    currentCoins = document.get("coins").toString().toInt()
+                    println("Actual" + currentCoins)
+                    totalScore += currentCoins
+                    println("Total" + totalScore)
+                    updateUserCoins()
+                }
+            } catch (e: Exception) {
+                Log.d(ContentValues.TAG, "get failed with ", e)
+            }
+        }
+    }
+/*
+    //Actualizando monedas, sumando resultado obtenido
     private fun updateUserCoins() {
         val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
         val docRef = db.collection("users").document(currentUser)
         docRef.update("coins", (totalScore).toString())
 
     }
+
+ */
+    //Actualizando monedas, sumando resultado obtenido usando coroutines
+    private fun updateUserCoins() {
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val docRef = db.collection("users").document(currentUser)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+            docRef.update("coins", totalScore.toString()).await()
+            } catch (e: Exception) {
+            Log.d(ContentValues.TAG, "update failed with ", e)
+        }
+    }
+}
 
 }

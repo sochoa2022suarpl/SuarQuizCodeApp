@@ -2,11 +2,11 @@ package net.iessochoa.suarpl.suarquizcodeapp.view
 
 import android.os.Bundle
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import net.iessochoa.suarpl.suarquizcodeapp.R
-import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentLoginBinding
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentRegisterBinding
+
 /*
 ToDo implementar registro usando BD Firebase/ROOM
  */
@@ -41,7 +41,7 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
