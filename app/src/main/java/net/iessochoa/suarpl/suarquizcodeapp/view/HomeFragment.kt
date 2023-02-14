@@ -71,6 +71,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         getConnectedUserName()
+        getUserCoins()
 
         binding.btLogout.setOnClickListener {
             //Salir
@@ -175,8 +176,21 @@ class HomeFragment : Fragment() {
                 Log.d(TAG, "get failed with ", exception)
             }
 
-
-
+    }
+    private fun getUserCoins(){
+        val currentUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        val docRef = db.collection("users").document(currentUser)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    binding.tvCantidadMonedas.text = document.get("coins").toString()
+                } else {
+                    Log.d(TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
     }
 
 }

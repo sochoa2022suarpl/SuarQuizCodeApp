@@ -114,7 +114,7 @@ class QuizFragment : Fragment() {
 
     //Método para cargar pregunta/respuestas usando ViewModel/LiveData
     fun loadQuestions(indice: Int){
-        questionViewModel.getLiveDataFromCategory("KOTLIN").observe(viewLifecycleOwner, Observer {
+        questionViewModel.getLiveDataFromCategory(selectedCategory).observe(viewLifecycleOwner, Observer {
             var i = indice
             answer = it[i].answer.toString()
             //Pregunta y botones
@@ -154,7 +154,7 @@ class QuizFragment : Fragment() {
 
     }
     fun nextQuestion(){
-        if (currentQuestionNumber<2){
+        if (currentQuestionNumber<9){
             currentQuestionNumber++
             loadQuestions(currentQuestionNumber)
         } else{
