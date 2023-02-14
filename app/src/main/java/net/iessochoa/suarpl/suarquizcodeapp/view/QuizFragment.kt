@@ -112,7 +112,7 @@ class QuizFragment : Fragment() {
         }.start()
     }
 
-    //Método para cargar pregunta/respuestas usando ViewModel/LiveData
+    //Método para cargar pregunta/respuestas usando ViewModel/LiveData/Repository desde Firebase
     fun loadQuestions(indice: Int){
         questionViewModel.getLiveDataFromCategory(selectedCategory).observe(viewLifecycleOwner, Observer {
             var i = indice

@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentLoginBinding
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentRegisterBinding
@@ -20,6 +22,11 @@ class RegisterFragment : Fragment() {
     //Variables ViewBinding
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+    lateinit var password:String
+    lateinit var mail:String
+
+
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,15 +42,21 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Variables firebase registro
+
+
 
         binding.buttonRegister.setOnClickListener {
-            var password = binding.RegisterPassword.text.toString()
-            var mail = binding.RegisterEmailAddress.text.toString()
+            password = binding.RegisterPassword.text.toString()
+            mail = binding.RegisterEmailAddress.text.toString()
+
 
             if (mail.isValidEmail() && password.isNotEmpty()){
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail,password).addOnCompleteListener {
+                    createNewFirebaseUser()
                     Toast.makeText(activity, "Usuario registrado correctamente", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+
+                    //findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                 }
             }else{
                 Toast.makeText(activity, "Error al registrar usuario", Toast.LENGTH_LONG).show()
@@ -53,6 +66,17 @@ class RegisterFragment : Fragment() {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
+
+    private fun createNewFirebaseUser() {
+        val docRef = db.collection("users").document(mail)
+        docRef.set(
+            hashMapOf("coins" to "7000",
+                      "name" to binding.RegisterName.text.toString(),
+                      "mail" to binding.RegisterEmailAddress.text.toString())
+        )
+
+    }
+
     fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 

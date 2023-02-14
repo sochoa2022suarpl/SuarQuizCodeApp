@@ -160,8 +160,11 @@ class HomeFragment : Fragment() {
         alert.setTitle("Salir")
         alert.show()
     }
+    //Método que obtiene el nombre del usuario logueado
     private fun getConnectedUserName(){
-        val currentUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
+        println("Usuario")
+        println(currentUser)
 
         val docRef = db.collection("users").document(currentUser)
         docRef.get()
@@ -177,20 +180,31 @@ class HomeFragment : Fragment() {
             }
 
     }
+    //Método que obtiene las monedas actuales del usuario logueado
     private fun getUserCoins(){
-        val currentUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
         val docRef = db.collection("users").document(currentUser)
         docRef.get()
             .addOnSuccessListener { document ->
-                if (document != null) {
+                if (document.get("coins") != null) {
                     binding.tvCantidadMonedas.text = document.get("coins").toString()
                 } else {
-                    Log.d(TAG, "No such document")
+                    setUserDefaults()
+
                 }
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "get failed with ", exception)
             }
+    }
+    private fun setUserDefaults(){
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val docRef = db.collection("users").document(currentUser)
+        docRef.set(
+            hashMapOf("coins" to "3000")
+        )
+        getUserCoins()
+
     }
 
 }
