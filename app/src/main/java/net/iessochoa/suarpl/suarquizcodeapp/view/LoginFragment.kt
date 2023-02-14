@@ -23,6 +23,8 @@ class LoginFragment : Fragment() {
     //Variables ViewBinding
     private var _binding:FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    lateinit var password:String
+    lateinit var mail:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,16 +67,21 @@ class LoginFragment : Fragment() {
         Autenticación usando Firebase Auth
          */
         binding.buttonLogin.setOnClickListener{
-            var password = binding.editTextTextPassword.text.toString()
-            var mail = binding.editTextTextEmailAddress.text.toString()
+             password = binding.editTextTextPassword.text.toString()
+             mail = binding.editTextTextEmailAddress.text.toString()
 
             if (mail.isValidEmail() && password.isNotEmpty()){
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(mail,password).addOnCompleteListener {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(mail,password)
+                    .addOnCompleteListener {
+                        if(it.isSuccessful){
                     Toast.makeText(activity, "Sesión iniciada correctamente", Toast.LENGTH_LONG).show()
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                }
+                }else{
+                    Toast.makeText(activity, "Error al iniciar sesión", Toast.LENGTH_LONG).show()
+                     }
+                    }
             }else{
-                Toast.makeText(activity, "Error al iniciar sesión", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, "Introduce todos los caracteres", Toast.LENGTH_LONG).show()
             }
         }
     }

@@ -7,16 +7,18 @@ import net.iessochoa.suarpl.suarquizcodeapp.model.QuestionModel
 import net.iessochoa.suarpl.suarquizcodeapp.model.QuestionModelProvider
 import net.iessochoa.suarpl.suarquizcodeapp.repository.QuestionRepository
 
-
+//Obtiene una lista de objetos dependiendo de la categoría seleccionada
 class QuestionViewModel: ViewModel() {
 
     private var questionModelListData = MutableLiveData<List<QuestionModel>>()
 
-    //Obtiene una lista de objetos dependiendo de la categoría seleccionada, provisional hasta integrar Repositorio
-    fun getLiveDataFromCategory(selectedCategory: String): LiveData<MutableList<QuestionModel>> {
-        var mutableData = MutableLiveData<MutableList<QuestionModel>>()
-        val repo = QuestionRepository()
 
+    fun getLiveDataFromCategory(selectedCategory: String): LiveData<MutableList<QuestionModel>> {
+        // variable para almacenar el livedata de tipo Mutablelist que obtendremos desde el repositorio
+        val mutableData = MutableLiveData<MutableList<QuestionModel>>()
+        //Instancia de repositorio
+        val repo = QuestionRepository()
+        //dependiendo de la categoría seleccionada en el RecyclerView, pide al repositorio que obtenga los datos, colocando un observer
         when(selectedCategory){
     "KOTLIN" ->         repo.getFirebaseQuestions("KOTLINQUESTIONS").observeForever {
         mutableData.value = it
@@ -29,7 +31,7 @@ class QuestionViewModel: ViewModel() {
     }
 
 }
-
+        //devolvemos el fetch obtenido desde el repositorio a la vista
         return mutableData
     }
 
