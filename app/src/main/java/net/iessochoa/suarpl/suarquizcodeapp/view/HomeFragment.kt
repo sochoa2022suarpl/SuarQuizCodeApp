@@ -163,8 +163,6 @@ class HomeFragment : Fragment() {
     //Método que obtiene el nombre del usuario logueado
     private fun getConnectedUserName(){
         val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
-        println("Usuario")
-        println(currentUser)
 
         val docRef = db.collection("users").document(currentUser)
         docRef.get()
