@@ -17,6 +17,7 @@ import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentQuizBinding
 import net.iessochoa.suarpl.suarquizcodeapp.model.QuestionModel
 import net.iessochoa.suarpl.suarquizcodeapp.model.QuestionModelProvider
+import net.iessochoa.suarpl.suarquizcodeapp.repository.QuestionRepository
 import net.iessochoa.suarpl.suarquizcodeapp.viewmodel.QuestionViewModel
 
 class QuizFragment : Fragment() {
@@ -43,7 +44,7 @@ class QuizFragment : Fragment() {
     //ViewModel
     private val questionViewModel : QuestionViewModel by viewModels()
 
-    private var questionModelList : List<QuestionModel> = QuestionModelProvider.questionModelProviderListKotlin.shuffled()
+    //private var questionModelList : List<QuestionModel> = QuestionRepository.getFirebaseQuestions().shuffled()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,19 +112,19 @@ class QuizFragment : Fragment() {
         }.start()
     }
 
-    //Método para cargar pregunta/respuestas usando ViewModel/LiveData
-    fun loadQuestions(int: Int){
+    //Método para cargar pregunta/respuestas usando ViewModel/LiveData/Repository desde Firebase
+    fun loadQuestions(indice: Int){
         questionViewModel.getLiveDataFromCategory(selectedCategory).observe(viewLifecycleOwner, Observer {
-            var i = int
-            answer = it[i].answer
+            var i = indice
+            answer = it[i].answer.toString()
             //Pregunta y botones
-            binding.tvPregunta.text = it[i].question
-            binding.btRespuesta1.text = it[i].option1
-            binding.btRespuesta2.text = it[i].option2
-            binding.btRespuesta3.text = it[i].option3
-            binding.btRespuesta4.text = it[i].option4
+            binding.tvPregunta.text = it[i].question.toString()
+            binding.btRespuesta1.text = it[i].option1.toString()
+            binding.btRespuesta2.text = it[i].option2.toString()
+            binding.btRespuesta3.text = it[i].option3.toString()
+            binding.btRespuesta4.text = it[i].option4.toString()
             //Elementos UI, contador de preguntas
-            binding.tvCurrentPreg.text = (i+1).toString()
+            binding.tvCurrentPreg.text = (i).toString()
             binding.tvTotalPregunta.text = it.size.toString()
 
         })
@@ -153,7 +154,7 @@ class QuizFragment : Fragment() {
 
     }
     fun nextQuestion(){
-        if (currentQuestionNumber<questionModelList.size-1){
+        if (currentQuestionNumber<9){
             currentQuestionNumber++
             loadQuestions(currentQuestionNumber)
         } else{

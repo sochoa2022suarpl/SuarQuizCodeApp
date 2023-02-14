@@ -12,6 +12,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentLoginBinding
 import kotlin.system.exitProcess
@@ -22,6 +23,8 @@ class LoginFragment : Fragment() {
     //Variables ViewBinding
     private var _binding:FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    lateinit var password:String
+    lateinit var mail:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,27 +63,30 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
 
-        //TODO CAMBIAR ESTE LOGIN PROVISIONAL EN FIREBASE E INTEGRAR EN MVVM
         /*
-        Autenticación rudimentaria para dar funcionalidad al
-        wireframe, se implementará autenticación
-        desde Firebase auth/ROOM
+        Autenticación usando Firebase Auth
          */
         binding.buttonLogin.setOnClickListener{
-            var password = binding.editTextTextPassword.text.toString()
-            var mail = binding.editTextTextEmailAddress.text.toString()
+             password = binding.editTextTextPassword.text.toString()
+             mail = binding.editTextTextEmailAddress.text.toString()
 
-            if (mail == "suar@prueba.com" && password == "1234"){
-            //if (mail.isValidEmail() && password == "1234"){
-                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            if (mail.isValidEmail() && password.isNotEmpty()){
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(mail,password)
+                    .addOnCompleteListener {
+                        if(it.isSuccessful){
+                    Toast.makeText(activity, "Sesión iniciada correctamente", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                }else{
+                    Toast.makeText(activity, "Error al iniciar sesión", Toast.LENGTH_LONG).show()
+                     }
+                    }
             }else{
-                Toast.makeText(activity, "Usuario no registrado", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, "Introduce todos los caracteres", Toast.LENGTH_LONG).show()
             }
         }
     }
     /*
-    Validador usando API de Google, pero no interesa por menor compatibilidad
-    de dispositivos
+    Validador usando API de Google
      */
     fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 

@@ -1,8 +1,10 @@
 package net.iessochoa.suarpl.suarquizcodeapp.view
 
 import android.app.AlertDialog
+import android.content.ContentValues.TAG
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +16,9 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.adapter.CategoryAdapter
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentHomeBinding
@@ -41,6 +46,8 @@ class HomeFragment : Fragment() {
 
     //String que pasamos para identificar el cuestionario
     private var quizCategoryString :String = "JAVA"
+    //Firestore
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +70,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        getConnectedUserName()
+        getUserCoins()
 
         binding.btLogout.setOnClickListener {
             //Salir
@@ -150,6 +159,47 @@ class HomeFragment : Fragment() {
         val alert = salirDialog.create()
         alert.setTitle("Salir")
         alert.show()
+    }
+    //Método que obtiene el nombre del usuario logueado
+    private fun getConnectedUserName(){
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
+
+        val docRef = db.collection("users").document(currentUser)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    binding.tvUsername.text = document.get("name").toString()
+                } else {
+                    Log.d(TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
+
+    }
+    //Método que obtiene las monedas actuales del usuario logueado
+    private fun getUserCoins(){
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val docRef = db.collection("users").document(currentUser)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document.get("coins") != null) {
+                    binding.tvCantidadMonedas.text = document.get("coins").toString()
+                } else {
+                    setUserDefaults()
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
+    }
+    private fun setUserDefaults(){
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val docRef = db.collection("users").document(currentUser)
+        docRef.update("coins", "3000")
+        getUserCoins()
+
     }
 
 }
