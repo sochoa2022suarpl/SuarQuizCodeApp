@@ -21,15 +21,15 @@
 
     <TextView
         android:id="@+id/tvUsername"
-        android:layout_width="220dp"
+        android:layout_width="218dp"
         android:layout_height="33dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:text="@string/tvUsuario"
         android:textColor="@color/Black"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/imageUser"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/tvUsuario" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ivCoin"
