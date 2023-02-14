@@ -19,16 +19,25 @@ class QuestionViewModel: ViewModel() {
         //Instancia de repositorio
         val repo = QuestionRepository()
         //dependiendo de la categoría seleccionada en el RecyclerView, pide al repositorio que obtenga los datos, colocando un observer
+        repo.getFirebaseQuestions(selectedCategory).observeForever {
+            mutableData.value = it
+        /*
+        //old method, cambiar las BD en Firestore para adaptar el nuevo
         when(selectedCategory){
-    "KOTLIN" ->         repo.getFirebaseQuestions("KOTLINQUESTIONS").observeForever {
+            "KOTLIN" ->         repo.getFirebaseQuestions("KOTLINQUESTIONS").observeForever {
         mutableData.value = it
-    }
-    "JAVA" ->         repo.getFirebaseQuestions("JAVAQUESTIONS").observeForever {
+            }
+            "REACT" ->         repo.getFirebaseQuestions("REACTQUESTIONS").observeForever {
         mutableData.value = it
-    }
-    "REACT" ->         repo.getFirebaseQuestions("REACTQUESTIONS").observeForever {
+            }
+            "HTML" ->         repo.getFirebaseQuestions("HTMLQUESTIONS").observeForever {
         mutableData.value = it
-    }
+            }
+            "NO" ->         repo.getFirebaseQuestions("HTMLQUESTIONS").observeForever {
+                mutableData.value = it
+            }
+
+         */
 
 }
         //devolvemos el fetch obtenido desde el repositorio a la vista

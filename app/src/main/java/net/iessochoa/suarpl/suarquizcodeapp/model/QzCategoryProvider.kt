@@ -29,8 +29,8 @@ class QzCategoryProvider {
                 "HTML"
             ),
             QzCategory(
-                "https://logospng.org/download/css-3/logo-css-3-256.png",
-                "CSS"
+                "https://logospng.org/download/mysql/mysql-256.png",
+                "MYSQL"
             ),
             QzCategory(
                 "https://logospng.org/download/java/logo-java-256.png",

@@ -132,14 +132,9 @@ class HomeFragment : Fragment() {
 
     }
     private fun onItemselected(quizCategory:QzCategory){
-        //Toast.makeText(this.context, quizCategory.catName, Toast.LENGTH_SHORT).show()
-        val selected = quizCategory.catName
-
-        when (selected){
-            "KOTLIN" -> quizCategoryString = "KOTLIN"
-            "JAVA" -> quizCategoryString = "JAVA"
-            "REACT" -> quizCategoryString = "REACT"
-        }
+        //Asignamos el valor de la categoría pulsada a la variable que pasaremos al fragment home
+        quizCategoryString = quizCategory.catName
+        //Navegamos al fragment Home pasando segundos restantes y categoría pulsada
         binding.apply {
             val next = HomeFragmentDirections.actionHomeFragmentToQuizFragment(secondsLeft, quizCategoryString)
             findNavController().navigate(next)
