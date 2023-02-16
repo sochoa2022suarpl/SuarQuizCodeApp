@@ -195,7 +195,8 @@ class HomeFragment : Fragment() {
             }
         }
     }
-    //Método que fija las monedas en 3000 en caso de que no exista el campo en la BD Firestore, usando corrutinas
+    //Método que fija las monedas en 3000 en caso de que no exista el campo en la BD Firestore,
+    // usando corrutinas
     private fun setUserDefaults() = CoroutineScope(Dispatchers.IO).launch {
         val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
         val docRef = db.collection("users").document(currentUser)
