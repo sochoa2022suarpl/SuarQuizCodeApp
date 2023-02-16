@@ -23,14 +23,15 @@ import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentResultsBinding
 class ResultsFragment : Fragment() {
     private var _binding: FragmentResultsBinding? = null
     private val binding get() = _binding!!
-    //Recuperando resultados
+    //Variables para recuperar resultados acertadas/fallidas
     private val arg: ResultsFragmentArgs by navArgs()
     private lateinit var rightAnswers : String
     private lateinit var wrongAnswers : String
     private lateinit var secsBonus : String
-    //Firebase
+
+    //Instancia Firebase
     val db = Firebase.firestore
-    //variable puntuacion
+    //Variables para calcular puntuacion
     var totalScore:Int = 0
     var currentCoins:Int =0
 
@@ -50,14 +51,15 @@ class ResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         binding.btVolverHome2.setOnClickListener {
             findNavController().navigate(R.id.action_resultsFragment_to_homeFragment)
         }
+        //Recuperando valores de acertadas/fallidas desde QuizFragment
         secsBonus = arg.secondsBonus.toString()
-        //Recuperando valores desde Quiz
         rightAnswers = arg.resRight.toString()
         wrongAnswers = arg.resWrong.toString()
+
+
 
         //Muestra resultados y actualiza las monedas en la BD
         showResults()
@@ -67,6 +69,7 @@ class ResultsFragment : Fragment() {
     //Calcula la puntuación obtenida
     private fun showResults(){
         totalScore = rightAnswers.toInt()*100
+
         binding.tvAcertadas.text = rightAnswers
         binding.tvFallidas.text = wrongAnswers
         //Penalización por 5 o más preguntas fallidas
@@ -77,30 +80,7 @@ class ResultsFragment : Fragment() {
         }
         binding.tvCantidadMonedas.text = totalScore.toString()
     }
-    /*
-    //Método que obtiene las monedas actuales del usuario logueado
-    //Y le suma las ganadas
-    private fun getUserCoins(){
-        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
-        val docRef = db.collection("users").document(currentUser)
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document.get("coins") != null) {
-                    currentCoins = document.get("coins").toString().toInt()
-                    println("Actual" + currentCoins)
-                    totalScore += currentCoins
-                    println("Total"+totalScore)
-                    updateUserCoins()
-                } else {
 
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(ContentValues.TAG, "get failed with ", exception)
-            }
-    }
-
-     */
     //Método que obtiene las monedas actuales del usuario logueado en Firebase Auth
     //Y le suma las ganadas, usando coroutines
     private fun getUserCoins() {
@@ -121,16 +101,6 @@ class ResultsFragment : Fragment() {
             }
         }
     }
-/*
-    //Actualizando monedas, sumando resultado obtenido
-    private fun updateUserCoins() {
-        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
-        val docRef = db.collection("users").document(currentUser)
-        docRef.update("coins", (totalScore).toString())
-
-    }
-
- */
     //Actualizando monedas, sumando resultado obtenido usando coroutines
     private fun updateUserCoins() {
         val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
@@ -144,5 +114,4 @@ class ResultsFragment : Fragment() {
         }
     }
 }
-
 }

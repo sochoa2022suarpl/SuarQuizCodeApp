@@ -1,6 +1,7 @@
 package net.iessochoa.suarpl.suarquizcodeapp.view
 
 import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.adapter.CategoryAdapter
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentHomeBinding
@@ -32,20 +38,18 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    //Variables RecyclerView, uso MutableList por si se
-    // implementa la compra de categorías ingame, en ese caso
-    // habría que aumentar los elementos
+    //Variables para volcar items en el RecyclerView
     private var qzCategoryMutableList: MutableList<QzCategory> =
         QzCategoryProvider.qzCategoryList.toMutableList()
     private val llmanager = LinearLayoutManager(context)
     private lateinit var adapter: CategoryAdapter
 
-    //Segundos restantes que luego pasaremos al fragmento del cuestionario
+    //Segundos restantes que luego pasaremos a QuizFragment
     private var secondsLeft: Int = 100
 
-    //String que pasamos para identificar el cuestionario
+    //String que pasamos a QuizFragment para identificar el cuestionario
     private var quizCategoryString :String = "JAVA"
-    //Firestore
+    //Instancia a Firestore
     val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +59,6 @@ class HomeFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-
     }
 
     override fun onCreateView(
@@ -76,17 +79,16 @@ class HomeFragment : Fragment() {
             //Salir
             exitApp()
         }
-        //añadimos listener al filtro de categorías, y filtramos la lista
+        //Añadimos listener al filtro de categorías, y filtramos la lista de ellas
         binding.etFilterCat.addTextChangedListener {userFilter ->
-            //la almacenamos en una constante, usamos lowerkeys para ignorar diferencias entre mays/mins
+            //La almacenamos en una constante, usamos lowerkeys para ignorar diferencias entre mays/mins
             val qzCategoryListFiltered = qzCategoryMutableList.filter { qzCategory -> qzCategory.catName.lowercase().contains(userFilter.toString().lowercase())}
-            //llamamos al método del adaptador que actualiza la lista de categorías
+            //Llamamos al método del adaptador que actualiza la lista de categorías
             adapter.updateQuizList(qzCategoryListFiltered)
         }
 
         binding.btRanking.setOnClickListener {
-            //Mostrar el ranking
-            //ToDo FEATURE OPCIONAL, IMPLEMENTAR SI DA TIEMPO
+            //Mostrar el ranking, feature opcional finalmente no implementada por falta de tiempo
             Toast.makeText(activity, "Feature opcional, aún no implementada", Toast.LENGTH_LONG).show()
         }
 
@@ -129,8 +131,8 @@ class HomeFragment : Fragment() {
         //Se le asigna un layout y un adaptador
         binding.recyclerView.layoutManager = llmanager
         binding.recyclerView.adapter = adapter
-
     }
+    //Función que controla el item del RecyclerView Pulsado
     private fun onItemselected(quizCategory:QzCategory){
         //Asignamos el valor de la categoría pulsada a la variable que pasaremos al fragment home
         quizCategoryString = quizCategory.catName
@@ -140,9 +142,8 @@ class HomeFragment : Fragment() {
             findNavController().navigate(next)
         }
     }
-
     /*
-    Construyendo AlertDialog para salir de la aplicación
+    AlertDialog para salir de la aplicación
     */
     private fun exitApp() {
         val salirDialog = AlertDialog.Builder(activity)
@@ -155,45 +156,51 @@ class HomeFragment : Fragment() {
         alert.show()
     }
     //Método que obtiene el nombre del usuario logueado
-    private fun getConnectedUserName(){
+    private fun getConnectedUserName() {
         val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
 
         val docRef = db.collection("users").document(currentUser)
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    binding.tvUsername.text = document.get("name").toString()
-                } else {
-                    Log.d(TAG, "No such document")
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val document = docRef.get().await()
+                withContext(Dispatchers.Main) {
+                    if (document != null) {
+                        binding.tvUsername.text = document.get("name").toString()
+                    } else {
+                        Log.d(TAG, "No existe el documento")
+                    }
                 }
+            } catch (e: Exception) {
+                Log.d(TAG, "Error al obtener el nombre de usuario ", e)
             }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }
+        }
+    }
+    //Método que obtiene las monedas actuales del usuario logueado, usando corrutinas
+    private fun getUserCoins() {
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val docRef = db.collection("users").document(currentUser)
 
-    }
-    //Método que obtiene las monedas actuales del usuario logueado
-    private fun getUserCoins(){
-        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
-        val docRef = db.collection("users").document(currentUser)
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document.get("coins") != null) {
-                    binding.tvCantidadMonedas.text = document.get("coins").toString()
-                } else {
-                    setUserDefaults()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val document = docRef.get().await()
+                withContext(Dispatchers.Main) {
+                    if (document.get("coins") != null) {
+                        binding.tvCantidadMonedas.text = document.get("coins").toString()
+                    } else {
+                        setUserDefaults()
+                    }
                 }
+            } catch (e: Exception) {
+                Log.d(ContentValues.TAG, "Error al obtener las monedas", e)
             }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }
+        }
     }
-    private fun setUserDefaults(){
+    //Método que fija las monedas en 3000 en caso de que no exista el campo en la BD Firestore, usando corrutinas
+    private fun setUserDefaults() = CoroutineScope(Dispatchers.IO).launch {
         val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
         val docRef = db.collection("users").document(currentUser)
-        docRef.update("coins", "3000")
+        docRef.update("coins", "3000").await()
         getUserCoins()
-
     }
 
 }
