@@ -70,8 +70,8 @@ class ResultsFragment : Fragment() {
     private fun showResults(){
         totalScore = rightAnswers.toInt()*100
 
-        binding.tvAcertadas.text = rightAnswers
-        binding.tvFallidas.text = wrongAnswers
+        binding.tvCantidadAcertadas.text = rightAnswers
+        binding.tvCantidadFallidas.text = wrongAnswers
         //Penalización por 5 o más preguntas fallidas
         if (wrongAnswers.toInt()>=5){
             if (rightAnswers.toInt()>0){
