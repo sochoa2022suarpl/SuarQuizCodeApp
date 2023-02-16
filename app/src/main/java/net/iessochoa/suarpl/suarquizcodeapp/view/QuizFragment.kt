@@ -2,34 +2,36 @@ package net.iessochoa.suarpl.suarquizcodeapp.view
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import kotlinx.coroutines.tasks.await
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentQuizBinding
-import net.iessochoa.suarpl.suarquizcodeapp.model.QuestionModel
-import net.iessochoa.suarpl.suarquizcodeapp.model.QuestionModelProvider
-import net.iessochoa.suarpl.suarquizcodeapp.repository.QuestionRepository
 import net.iessochoa.suarpl.suarquizcodeapp.viewmodel.QuestionViewModel
 
 class QuizFragment : Fragment() {
     //Variables ViewBinding
     private var _binding: FragmentQuizBinding? = null
     private val binding get() = _binding!!
-    //Variables para recuperar segundos restantes desde HomeFragment
+    //Variables para recuperar arguments desde HomeFragment
     private val args: QuizFragmentArgs by navArgs()
     private var secsLeft = 0
     //Temporizador
     private lateinit var timer: CountDownTimer
-    //Pregunta actual
+    //Índice pregunta actual
     private var currentQuestionNumber: Int = 0
     //Valor de la respuesta actual
     private var answer : String =""
@@ -40,11 +42,8 @@ class QuizFragment : Fragment() {
     //Recuento de aciertos/errores
     var rightAnswers : Int = 0
     var wrongAnswers : Int = 0
-
     //ViewModel
     private val questionViewModel : QuestionViewModel by viewModels()
-
-    //private var questionModelList : List<QuestionModel> = QuestionRepository.getFirebaseQuestions().shuffled()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +59,7 @@ class QuizFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentQuizBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -95,10 +94,11 @@ class QuizFragment : Fragment() {
     }
 
     /*
-    Método para iniciar el temporizador
+    Método para controlar el temporizador
      */
     fun startTimerQuiz(){
         //Recuperamos los segundos con safeargs y seteamos el temporizador
+
         secsLeft = args.secondsLeft
         binding.tvTimer.text = secsLeft.toString()
 
@@ -107,7 +107,11 @@ class QuizFragment : Fragment() {
                 binding.tvTimer.text = (millisUntilFinished/1000).toString()
             }
             override fun onFinish() {
-                Toast.makeText(activity, "Se acabó el tiempo!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity,
+                    "Se acabó el cuestionario, ACERTADAS: $rightAnswers FALLIDAS: $wrongAnswers", Toast.LENGTH_LONG).show()
+                timer.cancel()
+                canAnswer=false
+                goToResults()
             }
         }.start()
     }
@@ -115,9 +119,9 @@ class QuizFragment : Fragment() {
     //Método para cargar pregunta/respuestas usando ViewModel/LiveData/Repository desde Firebase
     fun loadQuestions(indice: Int){
         questionViewModel.getLiveDataFromCategory(selectedCategory).observe(viewLifecycleOwner, Observer {
-            var i = indice
+            val i = indice
             answer = it[i].answer.toString()
-            //Pregunta y botones
+            //Fijamos valores de cada objeto (Pregunta y botones) usando el índice de este
             binding.tvPregunta.text = it[i].question.toString()
             binding.btRespuesta1.text = it[i].option1.toString()
             binding.btRespuesta2.text = it[i].option2.toString()
@@ -126,17 +130,18 @@ class QuizFragment : Fragment() {
             //Elementos UI, contador de preguntas
             binding.tvCurrentPreg.text = (i).toString()
             binding.tvTotalPregunta.text = it.size.toString()
-
         })
+        //Permitimos contestar
         canAnswer = true
     }
+
 
     //Método para recuperar categoría seleccionada por safeargs
     fun loadCategory(){
         selectedCategory = args.category
     }
 
-    //Asignación de comprobación de respuestas a botones
+    //Asignación de comprobación de respuesta correcta según botón pulsado
     fun setButtonBindCheck(){
         if(canAnswer==true){
             binding.btRespuesta1.setOnClickListener{checkAnswer(binding.btRespuesta1)}
@@ -144,15 +149,10 @@ class QuizFragment : Fragment() {
             binding.btRespuesta3.setOnClickListener{checkAnswer(binding.btRespuesta3)}
             binding.btRespuesta4.setOnClickListener{checkAnswer(binding.btRespuesta4)}
         }else{
-
+            //No permite contestar, pero es redundante
         }
-
     }
-    fun setDefaults(){
-        rightAnswers = 0
-        wrongAnswers = 0
-
-    }
+    //Pasamos a la siguiente pregunta, actualizamos contadores de aciertos/fallos
     fun nextQuestion(){
         if (currentQuestionNumber<9){
             currentQuestionNumber++
@@ -165,14 +165,12 @@ class QuizFragment : Fragment() {
             goToResults()
         }
     }
-
-    //Ir al Fragment resultado pasando argumentos
+    //Ir al Fragment resultado pasando argumentos de acertadas/fallidas y la dificultad
     fun goToResults(){
         binding.apply {
             val next = QuizFragmentDirections.actionQuizFragmentToResultsFragment(secsLeft,rightAnswers,wrongAnswers)
             findNavController().navigate(next)
         }
-
     }
 
 

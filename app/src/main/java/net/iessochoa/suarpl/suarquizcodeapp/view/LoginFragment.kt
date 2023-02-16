@@ -1,7 +1,6 @@
 package net.iessochoa.suarpl.suarquizcodeapp.view
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -9,10 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentLoginBinding
 import kotlin.system.exitProcess
@@ -23,6 +23,7 @@ class LoginFragment : Fragment() {
     //Variables ViewBinding
     private var _binding:FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    //Variables login
     lateinit var password:String
     lateinit var mail:String
 
@@ -51,7 +52,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -69,18 +70,26 @@ class LoginFragment : Fragment() {
         binding.buttonLogin.setOnClickListener{
              password = binding.editTextTextPassword.text.toString()
              mail = binding.editTextTextEmailAddress.text.toString()
-
-            if (mail.isValidEmail() && password.isNotEmpty()){
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(mail,password)
-                    .addOnCompleteListener {
-                        if(it.isSuccessful){
-                    Toast.makeText(activity, "Sesión iniciada correctamente", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                }else{
-                    Toast.makeText(activity, "Error al iniciar sesión", Toast.LENGTH_LONG).show()
-                     }
+            //Inicio de sesión Usando Coroutines
+            if (mail.isValidEmail() && password.isNotEmpty()) {
+                //contexto de tipo Dispatchers.IO para realizar la operación de inicio de sesión en segundo plano
+                CoroutineScope(Dispatchers.IO).launch {
+                    delay(3000L)
+                    try {
+                        //suspensión await() para que se pueda llamar dentro del contexto de IO.
+                        val authResult = FirebaseAuth.getInstance().signInWithEmailAndPassword(mail, password).await()
+                        //cambio de contexto y resolución en el hilo principal
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(activity, "Sesión iniciada correctamente", Toast.LENGTH_LONG).show()
+                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                        }
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(activity, "Error al iniciar sesión", Toast.LENGTH_LONG).show()
+                        }
                     }
-            }else{
+                }
+            } else {
                 Toast.makeText(activity, "Introduce todos los caracteres", Toast.LENGTH_LONG).show()
             }
         }
