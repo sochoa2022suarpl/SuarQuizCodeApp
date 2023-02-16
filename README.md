@@ -20,6 +20,7 @@ _ Android Studio_
 ## Ejecutando el programa ⚙️
 
 _Importamos el proyecto desde el repositorio Github o desde el zip adjunto a la entrega_
+
 _Ejecutamos_
 
 
