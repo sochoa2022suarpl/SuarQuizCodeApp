@@ -1,9 +1,9 @@
 package net.iessochoa.suarpl.suarquizcodeapp.model
 
 /*
-Provider/repositorio provisional de la lista de
-categorías para aportar funcionalidad al wirefreame,
-en un futuro se obtendrán de una BD
+Provider de categorías que se obtendrán desde el RecyclerView,
+se deja este a modo de ejemplo para comprobar cómo se haría
+localmente. Las preguntas sí se obtienen desde la BD Firestore
 */
 class QzCategoryProvider {
     companion object{

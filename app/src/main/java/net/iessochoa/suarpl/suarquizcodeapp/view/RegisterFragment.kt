@@ -19,19 +19,16 @@ import kotlinx.coroutines.withContext
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentRegisterBinding
 
-/*
-ToDo implementar registro usando BD Firebase/ROOM
- */
 
 class RegisterFragment : Fragment() {
     //Variables ViewBinding
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+    //Variables datos registro
     lateinit var password:String
     lateinit var mail:String
     lateinit var name:String
-
-
+    //Instancia a Firebase
     val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,35 +45,12 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Variables firebase registro
 
-
-/*
-//registro de usuario Auth sin coroutines
-        binding.buttonRegister.setOnClickListener {
-            password = binding.RegisterPassword.text.toString()
-            mail = binding.RegisterEmailAddress.text.toString()
-
-
-            if (mail.isValidEmail() && password.isNotEmpty()){
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail,password).addOnCompleteListener {
-                    createNewFirebaseUser()
-                    Toast.makeText(activity, "Usuario registrado correctamente", Toast.LENGTH_LONG).show()
-
-                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-                }
-            }else{
-                Toast.makeText(activity, "Error al registrar usuario", Toast.LENGTH_LONG).show()
-            }
-        }
-
- */
-        //Creando usuario Auth con coroutines
+        //Creando usuario en Firebase Auth con coroutines
         binding.buttonRegister.setOnClickListener {
             password = binding.RegisterPassword.text.toString()
             mail = binding.RegisterEmailAddress.text.toString()
             name = binding.RegisterName.text.toString()
-
 
             if (mail.isValidEmail() && password.isNotEmpty() && name.isNotEmpty()) {
                 CoroutineScope(Dispatchers.IO).launch {
@@ -102,21 +76,9 @@ class RegisterFragment : Fragment() {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
-/*
-//Creando usuario en BDD sin coroutines
+
+    //Creando usuario en BD Firestore con coroutines
     private fun createNewFirebaseUser() {
-        val docRef = db.collection("users").document(mail)
-        docRef.set(
-            hashMapOf("coins" to "7000",
-                      "name" to binding.RegisterName.text.toString(),
-                      "mail" to binding.RegisterEmailAddress.text.toString())
-        )
-
-    }
-
- */
-    //Creando usuario en BDD con coroutines
-private fun createNewFirebaseUser() {
     val docRef = db.collection("users").document(mail)
     CoroutineScope(Dispatchers.IO).launch {
         try {
@@ -136,6 +98,7 @@ private fun createNewFirebaseUser() {
     }
 }
 
+    //Comprobador de email
     fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 
