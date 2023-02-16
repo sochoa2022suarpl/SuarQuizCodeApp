@@ -15,7 +15,6 @@ _También se utilizan otros recursos como el ViewBinding, el uso de RecyclerView
 _Antes de poner en marcha el proyecto, necesitaremos:_
 
 _ Java 8 instalado en el sistema_
-
 _ Android Studio_
 
 
