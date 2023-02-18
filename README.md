@@ -44,6 +44,8 @@ _Las herramientas utilizadas para la creación del proyecto son:_
 :clapper:
 * [Entrega 1 - UI](https://youtu.be/vQqhkbQEXkY)
 * [Entrega 2 - MVVM](https://youtu.be/K0vA10X1eYs)
+* [Entrega 3 - CORRUTINAS](https://youtu.be/cmuKQRGvY2Y)
+* [Entrega 4 - PERSISTENCIA DE DATOS, FIREBASE](https://youtu.be/cmuKQRGvY2Y)
 
 ## Autores ✒️
 
