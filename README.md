@@ -20,12 +20,12 @@ _Android Studio_
 
 
 ## Ejecutando el programa ⚙️
-En Android Studio:
+:computer: En Android Studio:
 _Importamos el proyecto desde el repositorio Github o desde el zip adjunto a la entrega_
 
 _Ejecutamos_
 
-En un terminal Android:
+:iphone: En un terminal Android:
 _Descargamos el archivo apk de la release_
 
 _Instalamos en el dispositivo y ejecutamos_
