@@ -41,9 +41,9 @@ _Las herramientas utilizadas para la creación del proyecto son:_
 
 
 ## Vídeo demostrativo de unidades funcionales(Entregas disponibles 2/2) ✒️
-
-*:clapper: [Entrega 1 - UI](https://youtu.be/vQqhkbQEXkY)
-*:clapper: [Entrega 2 - MVVM](https://youtu.be/K0vA10X1eYs)
+:clapper:
+* [Entrega 1 - UI](https://youtu.be/vQqhkbQEXkY)
+* [Entrega 2 - MVVM](https://youtu.be/K0vA10X1eYs)
 
 ## Autores ✒️
 
