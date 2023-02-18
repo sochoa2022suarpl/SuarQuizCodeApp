@@ -20,10 +20,15 @@ _Android Studio_
 
 
 ## Ejecutando el programa ⚙️
-
+En Android Studio:
 _Importamos el proyecto desde el repositorio Github o desde el zip adjunto a la entrega_
 
 _Ejecutamos_
+
+En un terminal Android:
+_Descargamos el archivo apk de la release_
+
+_Instalamos en el dispositivo y ejecutamos_
 
 
 ## Construido con 🛠️
@@ -35,7 +40,7 @@ _Las herramientas utilizadas para la creación del proyecto son:_
 * [Vegas Pro](https://www.vegascreativesoftware.com/es/vegas-pro/) - Editor de vídeo , versión 19.0
 
 
-## Vídeo demostrativo (Entregas disponibles 2/2) ✒️
+## Vídeo demostrativo de unidades funcionales(Entregas disponibles 2/2) ✒️
 
 * [Entrega 1 - UI](https://youtu.be/vQqhkbQEXkY)
 * [Entrega 2 - MVVM](https://youtu.be/K0vA10X1eYs)
