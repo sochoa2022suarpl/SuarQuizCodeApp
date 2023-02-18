@@ -1,6 +1,6 @@
 # SPLQuizCode app by SUAR PL
 
-_Práctica conjunta de asignaturas PSP/PMDM_
+_Proyecto conjunto para las asignaturas PSP/PMDM_
 
 ## Resumen del proyecto 🚀
 
