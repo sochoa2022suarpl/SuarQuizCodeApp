@@ -7,8 +7,8 @@ _Práctica conjunta de asignaturas PSP/PMDM_
 _SPLQuizCode es una app escrita 100% en KOTLIN en la que se desarrolla un juego de tipo cuestionario por categorías._
 
 
-_En ella se integran aspectos como arquitecura MVVM, backend con operaciones CRUD en BD externa (ROOM o Firebase, todavía sin decidir)._
-_También se utilizan otros recursos como el ViewBinding, el uso de RecyclerView, corrutinas..._
+_En ella se integran aspectos como arquitecura MVVM, RecyclerView, LiveData, backend con autenticación y operaciones CRUD en BD externa (Firebase)._
+_También se utilizan otros recursos como el ViewBinding, corrutinas..._
 
 ### Pre-requisitos 📋
 
