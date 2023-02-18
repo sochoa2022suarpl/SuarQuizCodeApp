@@ -39,7 +39,8 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/token"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageUser" />
+        app:layout_constraintTop_toBottomOf="@+id/imageUser"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/tv_cantidadMonedas"
@@ -68,8 +69,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="396dp"
-        android:layout_height="316dp"
+        android:layout_height="0dp"
         android:background="#7B787C"
+        app:layout_constraintBottom_toTopOf="@+id/btLogout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -146,33 +148,37 @@
         android:layout_width="140dp"
         android:layout_height="48dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/DarkSlateBlue"
         android:text="@string/bt_salir"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btRanking"
         android:layout_width="140dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/DarkSlateBlue"
         android:text="@string/bt_ranking"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/etFilterCat"
-        android:layout_width="283dp"
-        android:layout_height="43dp"
+        android:layout_width="286dp"
+        android:layout_height="49dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:singleLine="true"
-        android:maxLines="1"
-        android:imeOptions="actionDone"
         android:hint="@string/etFiltrarCateHint"
+        android:imeOptions="actionDone"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColorHint="#311B92"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/rgDifficulty" />
 

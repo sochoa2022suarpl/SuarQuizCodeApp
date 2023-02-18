@@ -157,6 +157,8 @@
         android:layout_height="48dp"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/DarkSlateBlue"
+        android:textColor="@color/Cornsilk"
         android:text="@string/bt_salir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
