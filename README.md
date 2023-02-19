@@ -45,6 +45,7 @@ _Las herramientas utilizadas para la creación del proyecto son:_
 * [Entrega 2 - MVVM](https://docs.google.com/document/d/1Jh_hihz_6VyZu6E-fmf6JNoFgpbCKDsKqUDw4mj5uW4/edit?usp=sharing)
 * [Entrega 3 - CORRUTINAS](https://docs.google.com/document/d/1OG5RHxiAFN7ulR4FBad5fRh4f4e3oiLBvaNGOO4GgiQ/edit?usp=sharing)
 * [Entrega 4 - PERSISTENCIA DE DATOS, FIREBASE](https://docs.google.com/document/d/1FeoLt_WuIJzGN_FL0Jq5lGKyO4h6ZkEXu6eg3JyWpPE/edit?usp=sharing)
+* [Entrega Final - ANÁLISIS, OPINIÓN PERSONAL](https://docs.google.com/document/d/1u0lnRmE2GorvCO9luaK0r9UgXikRyRhPaDnvJ3H8FIs/edit?usp=sharing)
 
 ## Vídeo demostrativo de unidades funcionales(Entregas disponibles 4/4) 🎞️
 
