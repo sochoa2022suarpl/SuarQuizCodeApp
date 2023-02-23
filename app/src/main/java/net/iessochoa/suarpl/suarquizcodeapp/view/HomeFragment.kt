@@ -89,7 +89,8 @@ class HomeFragment : Fragment() {
 
         binding.btRanking.setOnClickListener {
             //Mostrar el ranking, feature opcional finalmente no implementada por falta de tiempo
-            Toast.makeText(activity, "Feature opcional, aún no implementada", Toast.LENGTH_LONG).show()
+            //Cambiada por borrar cuenta
+            deleteAccount()
         }
 
         /*
@@ -155,6 +156,36 @@ class HomeFragment : Fragment() {
         alert.setTitle("Salir")
         alert.show()
     }
+    //Borrar la cuenta, dialog
+    private fun deleteAccount() {
+        val deleteDialog = AlertDialog.Builder(activity)
+        deleteDialog.setMessage("¿Quieres borrar la cuenta?")
+            .setCancelable(false)
+            .setPositiveButton("Sí") { _, _ -> deleteCurrentAccount() }
+            .setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+        val alert = deleteDialog.create()
+        alert.setTitle("Salir")
+        alert.show()
+    }
+
+    private fun deleteCurrentAccount(){
+        val user = FirebaseAuth.getInstance().currentUser!!
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                user.delete().await()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(activity, "Cuenta borrada correctamente", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+                }
+            } catch (e: Exception) {
+                Toast.makeText(activity, "Error borrando cuenta", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+
     //Método que obtiene el nombre del usuario logueado
     private fun getConnectedUserName() {
         val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()

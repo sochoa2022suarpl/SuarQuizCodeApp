@@ -156,12 +156,12 @@
 
     <Button
         android:id="@+id/btRanking"
-        android:layout_width="140dp"
+        android:layout_width="171dp"
         android:layout_height="48dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/DarkSlateBlue"
-        android:text="@string/bt_ranking"
+        android:text="@string/borrar_cuenta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
