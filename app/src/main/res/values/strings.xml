@@ -44,4 +44,5 @@
     <string name="tvTotal">Total</string>
     <string name="tvUsuario">Usuario</string>
     <string name="etFiltrarCateHint">Filtrar categoría</string>
+    <string name="borrar_cuenta">BORRAR CUENTA</string>
 </resources>
