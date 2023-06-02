@@ -1,6 +1,6 @@
 # SPLQuizCode app by SUAR PL
 
-_Proyecto conjunto para las asignaturas PSP/PMDM_
+_Proyecto TFG para IES Severo Ochoa, 2023_
 
 ## Resumen del proyecto 🚀
 
