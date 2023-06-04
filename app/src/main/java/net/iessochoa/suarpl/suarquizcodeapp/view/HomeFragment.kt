@@ -28,10 +28,10 @@ import net.iessochoa.suarpl.suarquizcodeapp.adapter.CategoryAdapter
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentHomeBinding
 import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategory
 import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProvider
+import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProviderEng
+import java.util.*
 import kotlin.system.exitProcess
 
-//ToDo añadir diseño y onclicklistener al RecycledView para acceder a los cuestionarios
-//ToDo sustituir el fake provider por repositorios una vez integrada la BD
 
 class HomeFragment : Fragment() {
     //Variables ViewBinding
@@ -39,8 +39,14 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     //Variables para volcar items en el RecyclerView
+    private var currentLang = obtenerIdiomaSistema()
+
     private var qzCategoryMutableList: MutableList<QzCategory> =
-        QzCategoryProvider.qzCategoryList.toMutableList()
+        if (currentLang == "es") {
+            QzCategoryProvider.qzCategoryList.toMutableList()
+        } else {
+            QzCategoryProviderEng.qzCategoryListEng.toMutableList()
+        }
     private val llmanager = LinearLayoutManager(context)
     private lateinit var adapter: CategoryAdapter
 
@@ -71,6 +77,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initRecyclerView()
         getConnectedUserName()
         getUserCoins()
@@ -136,7 +143,7 @@ class HomeFragment : Fragment() {
     //Función que controla el item del RecyclerView Pulsado
     private fun onItemselected(quizCategory:QzCategory){
         //Asignamos el valor de la categoría pulsada a la variable que pasaremos al fragment home
-        quizCategoryString = quizCategory.catName
+        quizCategoryString = quizCategory.catFBValue
         //Navegamos al fragment Home pasando segundos restantes y categoría pulsada
         binding.apply {
             val next = HomeFragmentDirections.actionHomeFragmentToQuizFragment(secondsLeft, quizCategoryString)
@@ -233,6 +240,10 @@ class HomeFragment : Fragment() {
         val docRef = db.collection("users").document(currentUser)
         docRef.update("coins", "3000").await()
         getUserCoins()
+    }
+
+    fun obtenerIdiomaSistema(): String {
+        return Locale.getDefault().language
     }
 
 }

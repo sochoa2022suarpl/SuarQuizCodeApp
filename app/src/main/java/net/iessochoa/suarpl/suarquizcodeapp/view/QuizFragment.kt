@@ -128,7 +128,7 @@ class QuizFragment : Fragment() {
             binding.btRespuesta3.text = it[i].option3.toString()
             binding.btRespuesta4.text = it[i].option4.toString()
             //Elementos UI, contador de preguntas
-            binding.tvCurrentPreg.text = (i).toString()
+            binding.tvCurrentPreg.text = (i+1).toString()
             binding.tvTotalPregunta.text = it.size.toString()
         })
         //Permitimos contestar
