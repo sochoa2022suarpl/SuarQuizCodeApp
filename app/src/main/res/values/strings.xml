@@ -45,4 +45,14 @@
     <string name="tvUsuario">Usuario</string>
     <string name="etFiltrarCateHint">Filtrar categoría</string>
     <string name="borrar_cuenta">BORRAR CUENTA</string>
+    <string name="tiempo_100">Tiempo fijado a 100 segs</string>
+    <string name="tiempo_60">Tiempo fijado a 60 segs</string>
+    <string name="quieres_salir">¿Quieres salir de la aplicación?</string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
+    <string name="quieres_borrar">¿Quieres borrar la cuenta?</string>
+    <string name="cuenta_borrada">Cuenta borrada satisfactoriamente</string>
+    <string name="error_borrado">Error al borrar la cuenta</string>
+    <string name="resp_correcta">Correcto!</string>
+    <string name="resp_incorrecta">Incorrecto!</string>
 </resources>

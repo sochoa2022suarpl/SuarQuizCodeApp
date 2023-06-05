@@ -112,7 +112,7 @@ class HomeFragment : Fragment() {
                     secondsLeft = 100
                     Snackbar.make(
                         binding.homeFragment,
-                        "Tiempo total fijado a 100 segundos",
+                        getString(R.string.tiempo_100),
                         Snackbar.LENGTH_LONG
                     ).show()
                 }
@@ -121,7 +121,7 @@ class HomeFragment : Fragment() {
                     secondsLeft = 60
                     Snackbar.make(
                         binding.homeFragment,
-                        "Tiempo total fijado a 60 segundos",
+                        getString(R.string.tiempo_60),
                         Snackbar.LENGTH_LONG
                     ).show()
                 }
@@ -155,23 +155,23 @@ class HomeFragment : Fragment() {
     */
     private fun exitApp() {
         val salirDialog = AlertDialog.Builder(activity)
-        salirDialog.setMessage("¿Quieres salir de la aplicación?")
+        salirDialog.setMessage(getString(R.string.quieres_salir))
             .setCancelable(false)
-            .setPositiveButton("Sí") { _, _ -> exitProcess(0) }
-            .setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+            .setPositiveButton(getString(R.string.si)) { _, _ -> exitProcess(0) }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.cancel() }
         val alert = salirDialog.create()
-        alert.setTitle("Salir")
+        alert.setTitle(getString(R.string.bt_salir))
         alert.show()
     }
     //Borrar la cuenta, dialog
     private fun deleteAccount() {
         val deleteDialog = AlertDialog.Builder(activity)
-        deleteDialog.setMessage("¿Quieres borrar la cuenta?")
+        deleteDialog.setMessage(getString(R.string.quieres_borrar))
             .setCancelable(false)
-            .setPositiveButton("Sí") { _, _ -> deleteCurrentAccount() }
-            .setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+            .setPositiveButton(getString(R.string.si)) { _, _ -> deleteCurrentAccount() }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.cancel() }
         val alert = deleteDialog.create()
-        alert.setTitle("Salir")
+        alert.setTitle(getString(R.string.borrar_cuenta))
         alert.show()
     }
 
@@ -182,11 +182,13 @@ class HomeFragment : Fragment() {
             try {
                 user.delete().await()
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(activity, "Cuenta borrada correctamente", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+                        Toast.makeText(activity, getString(R.string.cuenta_borrada), Toast.LENGTH_SHORT)
+                            .show()
+                        findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+
                 }
             } catch (e: Exception) {
-                Toast.makeText(activity, "Error borrando cuenta", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, getString(R.string.cuenta_borrada), Toast.LENGTH_SHORT).show()
             }
         }
     }
