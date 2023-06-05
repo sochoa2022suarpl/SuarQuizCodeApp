@@ -85,10 +85,10 @@ class QuizFragment : Fragment() {
     private fun checkAnswer(button: Button) {
         if (button.text==answer){
             rightAnswers++
-            Toast.makeText(activity, "Respuesta correcta ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, getString(R.string.resp_correcta), Toast.LENGTH_SHORT).show()
         }else{
             wrongAnswers++
-            Toast.makeText(activity, "Respuesta Incorrecta", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, getString(R.string.resp_incorrecta), Toast.LENGTH_SHORT).show()
         }
         nextQuestion()
     }
@@ -107,8 +107,6 @@ class QuizFragment : Fragment() {
                 binding.tvTimer.text = (millisUntilFinished/1000).toString()
             }
             override fun onFinish() {
-                Toast.makeText(activity,
-                    "Se acabó el cuestionario, ACERTADAS: $rightAnswers FALLIDAS: $wrongAnswers", Toast.LENGTH_LONG).show()
                 timer.cancel()
                 canAnswer=false
                 goToResults()
@@ -158,8 +156,6 @@ class QuizFragment : Fragment() {
             currentQuestionNumber++
             loadQuestions(currentQuestionNumber)
         } else{
-            Toast.makeText(activity,
-                "Se acabó el cuestionario, ACERTADAS: $rightAnswers FALLIDAS: $wrongAnswers", Toast.LENGTH_LONG).show()
             timer.cancel()
             canAnswer=false
             goToResults()

@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">SPLCodeQuizApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //String propios
+    <string name="register_now">Don´t you have an account? Register now.</string>
+    <string name="login_button">Login</string>
+    <string name="register_button">Register account</string>
+    <string name="tb_introMail">Valid E-mail</string>
+    <string name="tb_introPass">Password</string>
+    <string name="tv_result">Result</string>
+    <string name="lorem_ipsum">Result</string>
+    <string name="tv_resultado">Result</string>
+    <string name="tv_acertadas">Right answers:</string>
+    <string name="tv_puntuacion">Score</string>
+    <string name="tv_splash">Developed by Suar PL</string>
+    <string name="iv_SplashDescription">SplashLogo</string>
+    <string name="te_nombreRegistro">Username</string>
+    <string name="tv_cantMonedas">XXXXXX</string>
+    <string name="tv_monedas">coins</string>
+    <string name="rb_dificil">Hard</string>
+    <string name="rb_normal">Normal</string>
+    <string name="tv_dificultad">Difficulty</string>
+    <string name="tv_selecCategoria">Category</string>
+    <string name="bt_salir">EXIT</string>
+    <string name="bt_ranking">RANKING</string>
+    <string name="tvSelecLenguaje">Selecciona lenguaje</string>
+    <string name="tv_NowRegistered">Already registered? Login</string>
+    <string name="tvTituloCategory">KOTLIN</string>
+
+    <string name="tvCurrentPreg">1</string>
+    <string name="tvPregunta">¿Qué representa "fname" en el siguiente código: fun myFunction(fname: String)?</string>
+    <string name="tvTitPregunta">Question</string>
+    <string name="tvTotalPregunta">1</string>
+    <string name="tvDe">of</string>
+    <string name="tvTimer">100</string>
+    <string name="bt_Respuesta1">Answer 1</string>
+    <string name="bt_Respuesta2">Answer 2</string>
+    <string name="bt_Respuesta3">Answer 3</string>
+    <string name="bt_Respuesta4">Answer 4</string>
+    <string name="tvFallidas">Wrong answers:</string>
+    <string name="tvDificultad">Multiplier:</string>
+    <string name="tvTotal">Total</string>
+    <string name="tvUsuario">User</string>
+    <string name="etFiltrarCateHint">Category filter</string>
+    <string name="borrar_cuenta">DELETE ACCOUNT</string>
+    <string name="tiempo_100">Max time is now 100 secs</string>
+    <string name="tiempo_60">Max time is now 60 secs</string>
+    <string name="quieres_salir">Do you want to close the app?</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
+    <string name="quieres_borrar">Delete account?</string>
+    <string name="cuenta_borrada">Account deleted successfully</string>
+    <string name="error_borrado">Error deleting account</string>
+    <string name="resp_correcta">Yes!</string>
+    <string name="resp_incorrecta">Fail!</string>
+</resources>
