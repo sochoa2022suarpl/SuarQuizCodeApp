@@ -78,6 +78,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getUserPremium()
         initRecyclerView()
         getConnectedUserName()
         getUserCoins()
@@ -246,6 +247,32 @@ class HomeFragment : Fragment() {
 
     fun obtenerIdiomaSistema(): String {
         return Locale.getDefault().language
+    }
+
+    //Método que comprueba si el usuario logueado es premium, usando corrutinas
+    private fun getUserPremium() {
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val docRef = db.collection("users").document(currentUser)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val document = docRef.get().await()
+                withContext(Dispatchers.Main) {
+                    if (document.get("premium") != null) {
+                        if (document.get("premium") == false){
+                            Log.d(ContentValues.TAG, "No tiene premium")
+                        }else{
+                            Log.d(ContentValues.TAG, "Usuario premium")
+                            binding.imageUser.setImageResource(R.drawable.premium)
+                        }
+                    } else {
+                        Log.d(ContentValues.TAG, "Campo premium nulo")
+                    }
+                }
+            } catch (e: Exception) {
+                Log.d(ContentValues.TAG, "Error al obtener las monedas", e)
+            }
+        }
     }
 
 }
