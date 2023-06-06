@@ -207,6 +207,7 @@
         android:clickable="true"
         android:foregroundTint="@color/OrangeRed"
         android:src="@drawable/ic_shopping_cart"
+        android:background="@drawable/gold_gradient"
         android:tint="@color/Orange"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"

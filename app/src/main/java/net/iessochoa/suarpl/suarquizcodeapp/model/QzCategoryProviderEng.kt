@@ -21,22 +21,12 @@ class QzCategoryProviderEng {
             QzCategory(
                 "https://logospng.org/download/typescript/typescript-256.png",
                 "TYPESCRIPT",
-                "enTYPESCRYPT"
-            ),
-            QzCategory(
-                "https://logospng.org/download/git/git-256.png",
-                "GIT",
-                "enGIT"
+                "enTYPESCRIPT"
             ),
             QzCategory(
                 "https://logospng.org/download/html-5/logo-html-5-256.png",
                 "HTML",
                 "enHTML"
-            ),
-            QzCategory(
-                "https://logospng.org/download/mysql/mysql-256.png",
-                "MySQL",
-                "enMYSQL"
             ),
             QzCategory(
                 "https://logospng.org/download/java/logo-java-256.png",

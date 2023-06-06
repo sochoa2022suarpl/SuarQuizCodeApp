@@ -26,9 +26,7 @@ import kotlinx.coroutines.withContext
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.adapter.CategoryAdapter
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentHomeBinding
-import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategory
-import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProvider
-import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProviderEng
+import net.iessochoa.suarpl.suarquizcodeapp.model.*
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -265,13 +263,29 @@ class HomeFragment : Fragment() {
                 val document = docRef.get().await()
                 withContext(Dispatchers.Main) {
                     if (document.get("premium") != null) {
-                        if (document.get("premium") == false){
-                            Log.d(ContentValues.TAG, "No tiene premium")
-                        }else{
+                        if (document.get("premium") == false && currentLang == "es"){
+                            qzCategoryMutableList = QzCategoryProvider.qzCategoryList.toMutableList()
+                            initRecyclerView()
+                        }else if (document.get("premium") == false && currentLang != "es"){
+
+                            qzCategoryMutableList = QzCategoryProviderEng.qzCategoryListEng.toMutableList()
+                            initRecyclerView()
+                        }else if (document.get("premium") == true && currentLang != "es"){
                             Log.d(ContentValues.TAG, "Usuario premium")
                             binding.imageUser.setImageResource(R.drawable.premium)
+                            qzCategoryMutableList = QzCategoryProviderPremiumEng.qzCategoryListEng.toMutableList()
+                            initRecyclerView()
+                        }else if (document.get("premium") == true && currentLang == "es"){
+                            Log.d(ContentValues.TAG, "Usuario premium")
+                            binding.imageUser.setImageResource(R.drawable.premium)
+                            qzCategoryMutableList = QzCategoryProviderPremium.qzCategoryList.toMutableList()
+                            initRecyclerView()
+                        }else{
+                            Log.d(ContentValues.TAG, "Imposible determinar Premium")
                         }
                     } else {
+                        qzCategoryMutableList = QzCategoryProvider.qzCategoryList.toMutableList()
+                        initRecyclerView()
                         Log.d(ContentValues.TAG, "Campo premium nulo")
                     }
                 }

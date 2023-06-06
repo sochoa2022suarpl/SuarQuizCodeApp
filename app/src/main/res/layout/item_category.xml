@@ -13,7 +13,7 @@
         android:id="@+id/cvItemCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#272727">
+        android:background="@drawable/cat_gradient">
 
         <ImageView
             android:id="@+id/ivLanguageLogo"

@@ -6,7 +6,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.model.Score
-
+/*
+Adapter de puntuación máxima, con ViewHolder en inner class
+*/
 class ScoreAdapter : RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
     private val scoresList = mutableListOf<Score>()
 
