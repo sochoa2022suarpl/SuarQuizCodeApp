@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/imageUser"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/user"
@@ -23,11 +23,11 @@
         android:id="@+id/tvUsername"
         android:layout_width="218dp"
         android:layout_height="33dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="30dp"
         android:text="@string/tvUsuario"
         android:textColor="@color/Black"
-        android:textSize="20sp"
+        android:textSize="28sp"
         app:layout_constraintStart_toEndOf="@+id/imageUser"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,7 +58,6 @@
         android:id="@+id/tvMonedas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="52dp"
         android:text="@string/tv_monedas"
         android:textColor="@color/Black"
@@ -111,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:text="@string/tv_dificultad"
         android:textColor="@color/Black"
@@ -135,8 +134,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="79dp"
-        android:layout_height="76dp"
+        android:layout_width="99dp"
+        android:layout_height="93dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/logo"
@@ -181,5 +180,20 @@
         android:textColorHint="#311B92"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/rgDifficulty" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:backgroundTint="@color/Orange"
+        android:tint="@color/Orange"
+        android:foregroundTint="@color/OrangeRed"
+        android:src="@drawable/ic_shopping_cart"
+        app:layout_constraintBottom_toTopOf="@+id/btRanking"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

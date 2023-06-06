@@ -25,7 +25,7 @@
     <string name="tv_selecCategoria">Category</string>
     <string name="bt_salir">EXIT</string>
     <string name="bt_ranking">RANKING</string>
-    <string name="tvSelecLenguaje">Selecciona lenguaje</string>
+    <string name="tvSelecLenguaje">Select language</string>
     <string name="tv_NowRegistered">Already registered? Login</string>
     <string name="tvTituloCategory">KOTLIN</string>
 
@@ -55,4 +55,6 @@
     <string name="error_borrado">Error deleting account</string>
     <string name="resp_correcta">Yes!</string>
     <string name="resp_incorrecta">Fail!</string>
+    <string name="max_puntuacion">Max Scores</string>
+    <string name="bt_volver">BACK</string>
 </resources>
