@@ -104,6 +104,10 @@ class HomeFragment : Fragment() {
             val next = HomeFragmentDirections.actionHomeFragmentToScoreFragment()
             findNavController().navigate(next)
         }
+        binding.floatingActionButton.setOnClickListener{
+            val next = HomeFragmentDirections.actionHomeFragmentToScoreFragment()
+            findNavController().navigate(next)
+        }
 
         /*
         Al cambiar la dificultad con los radiobuttons, cambia el color

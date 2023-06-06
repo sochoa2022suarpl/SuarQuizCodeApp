@@ -35,10 +35,12 @@ class ScoreAdapter : RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
     }
 
     inner class ScoreViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val positionTextView: TextView = itemView.findViewById(R.id.positionTextView)
         private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         private val coinsTextView: TextView = itemView.findViewById(R.id.coinsTextView)
 
         fun bind(score: Score) {
+            positionTextView.text = (position + 1).toString()
             nameTextView.text = score.name
             coinsTextView.text = score.coins
         }

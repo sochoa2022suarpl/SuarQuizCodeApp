@@ -45,7 +45,7 @@ class ScoreFragment : Fragment() {
     }
 
     private fun fetchScoresFromFirestore() {
-        scoresCollection.orderBy("coins", Query.Direction.DESCENDING).limit(10)
+        scoresCollection.orderBy("coins", Query.Direction.DESCENDING).limit(25)
             .get()
             .addOnSuccessListener { documents ->
                 val scoresList = mutableListOf<Score>()
@@ -54,6 +54,7 @@ class ScoreFragment : Fragment() {
                     val coins = document.getString("coins")
                     if (name != null && coins != null) {
                         scoresList.add(Score(name, coins))
+
                     }
                 }
                 adapter.setScores(scoresList)
