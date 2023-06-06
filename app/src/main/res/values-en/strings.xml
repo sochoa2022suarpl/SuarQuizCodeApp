@@ -57,4 +57,5 @@
     <string name="resp_incorrecta">Fail!</string>
     <string name="max_puntuacion">Max Scores</string>
     <string name="bt_volver">BACK</string>
+    <string name="ranking">RANK</string>
 </resources>

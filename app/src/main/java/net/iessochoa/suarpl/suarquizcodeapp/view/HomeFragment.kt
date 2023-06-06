@@ -95,10 +95,16 @@ class HomeFragment : Fragment() {
             adapter.updateQuizList(qzCategoryListFiltered)
         }
 
-        binding.btRanking.setOnClickListener {
+        binding.btRank.setOnClickListener {
             //Mostrar el ranking, feature opcional finalmente no implementada por falta de tiempo
             //Cambiada por borrar cuenta
             deleteAccount()
+        }
+        binding.btDeleteAcc.setOnClickListener {
+            //Mostrar el ranking, feature opcional finalmente no implementada por falta de tiempo
+            //Cambiada por borrar cuenta
+            val next = HomeFragmentDirections.actionHomeFragmentToScoreFragment()
+            findNavController().navigate(next)
         }
 
         /*

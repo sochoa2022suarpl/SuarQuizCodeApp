@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,6 +18,7 @@ import net.iessochoa.suarpl.suarquizcodeapp.model.Score
 class ScoreFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ScoreAdapter
+    private lateinit var buttonBack: Button
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val scoresCollection = firestore.collection("users")
 
@@ -27,12 +30,17 @@ class ScoreFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_score, container, false)
 
         recyclerView = view.findViewById(R.id.recyclerViewScore)
+        buttonBack = view.findViewById(R.id.btBack)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = ScoreAdapter()
         recyclerView.adapter = adapter
 
         fetchScoresFromFirestore()
 
+        buttonBack.setOnClickListener {
+            val next = ScoreFragmentDirections.actionScoreFragmentToHomeFragment()
+            findNavController().navigate(next)
+        }
         return view
     }
 

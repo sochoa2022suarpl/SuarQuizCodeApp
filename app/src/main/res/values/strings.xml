@@ -45,7 +45,8 @@
     <string name="tvTotal">Total</string>
     <string name="tvUsuario">Usuario</string>
     <string name="etFiltrarCateHint">Filtrar categoría</string>
-    <string name="borrar_cuenta">BORRAR CUENTA</string>
+    <string name="borrar_cuenta">Borrar Cuenta</string>
+    <string name="ranking">RANK</string>
     <string name="tiempo_100">Tiempo fijado a 100 segs</string>
     <string name="tiempo_60">Tiempo fijado a 60 segs</string>
     <string name="quieres_salir">¿Quieres salir de la aplicación?</string>
