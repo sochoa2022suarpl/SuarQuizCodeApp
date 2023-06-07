@@ -58,4 +58,11 @@
     <string name="max_puntuacion">Max Scores</string>
     <string name="bt_volver">BACK</string>
     <string name="ranking">RANK</string>
+    <string name="shop_title">Shop</string>
+    <string name="shop_bt_comprar">BUY</string>
+    <string name="shop_item1">DLC Pack 1, which includes two new quiz categories!</string>
+    <string name="shop_ya_adquirido">ALREADY BOUGHT</string>
+    <string name="shop_allPurchased">You have purchased all Premium Items, new ones coming soon, stay tunned!</string>
+    <string name="shop_articulo_comprado">Item purchased successfully</string>
+    <string name="tv_loginEmail">User e-mail</string>
 </resources>

@@ -23,6 +23,19 @@ public class HomeFragmentDirections private constructor() {
       }
   }
 
+  private data class ActionHomeFragmentToShopFragment(
+    public val currentCoins: String = "0"
+  ) : NavDirections {
+    public override val actionId: Int = R.id.action_homeFragment_to_shopFragment
+
+    public override val arguments: Bundle
+      get() {
+        val result = Bundle()
+        result.putString("currentCoins", this.currentCoins)
+        return result
+      }
+  }
+
   public companion object {
     public fun actionHomeFragmentToQuizFragment(secondsLeft: Int, category: String): NavDirections =
         ActionHomeFragmentToQuizFragment(secondsLeft, category)
@@ -32,5 +45,8 @@ public class HomeFragmentDirections private constructor() {
 
     public fun actionHomeFragmentToScoreFragment(): NavDirections =
         ActionOnlyNavDirections(R.id.action_homeFragment_to_scoreFragment)
+
+    public fun actionHomeFragmentToShopFragment(currentCoins: String = "0"): NavDirections =
+        ActionHomeFragmentToShopFragment(currentCoins)
   }
 }

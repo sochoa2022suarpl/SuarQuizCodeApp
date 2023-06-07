@@ -105,7 +105,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(next)
         }
         binding.floatingActionButton.setOnClickListener{
-            val next = HomeFragmentDirections.actionHomeFragmentToScoreFragment()
+            val next = HomeFragmentDirections.actionHomeFragmentToShopFragment()
             findNavController().navigate(next)
         }
 
