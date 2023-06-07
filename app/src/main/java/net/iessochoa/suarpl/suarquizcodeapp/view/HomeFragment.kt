@@ -26,9 +26,7 @@ import kotlinx.coroutines.withContext
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.adapter.CategoryAdapter
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentHomeBinding
-import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategory
-import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProvider
-import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProviderEng
+import net.iessochoa.suarpl.suarquizcodeapp.model.*
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -78,6 +76,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getUserPremium()
         initRecyclerView()
         getConnectedUserName()
         getUserCoins()
@@ -94,10 +93,20 @@ class HomeFragment : Fragment() {
             adapter.updateQuizList(qzCategoryListFiltered)
         }
 
-        binding.btRanking.setOnClickListener {
+        binding.btRank.setOnClickListener {
             //Mostrar el ranking, feature opcional finalmente no implementada por falta de tiempo
             //Cambiada por borrar cuenta
             deleteAccount()
+        }
+        binding.btDeleteAcc.setOnClickListener {
+            //Mostrar el ranking, feature opcional finalmente no implementada por falta de tiempo
+            //Cambiada por borrar cuenta
+            val next = HomeFragmentDirections.actionHomeFragmentToScoreFragment()
+            findNavController().navigate(next)
+        }
+        binding.floatingActionButton.setOnClickListener{
+            val next = HomeFragmentDirections.actionHomeFragmentToShopFragment()
+            findNavController().navigate(next)
         }
 
         /*
@@ -246,6 +255,48 @@ class HomeFragment : Fragment() {
 
     fun obtenerIdiomaSistema(): String {
         return Locale.getDefault().language
+    }
+
+    //Método que comprueba si el usuario logueado es premium, usando corrutinas
+    private fun getUserPremium() {
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val docRef = db.collection("users").document(currentUser)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val document = docRef.get().await()
+                withContext(Dispatchers.Main) {
+                    if (document.get("premium") != null) {
+                        if (document.get("premium") == false && currentLang == "es"){
+                            qzCategoryMutableList = QzCategoryProvider.qzCategoryList.toMutableList()
+                            initRecyclerView()
+                        }else if (document.get("premium") == false && currentLang != "es"){
+
+                            qzCategoryMutableList = QzCategoryProviderEng.qzCategoryListEng.toMutableList()
+                            initRecyclerView()
+                        }else if (document.get("premium") == true && currentLang != "es"){
+                            Log.d(ContentValues.TAG, "Usuario premium")
+                            binding.imageUser.setImageResource(R.drawable.premium)
+                            qzCategoryMutableList = QzCategoryProviderPremiumEng.qzCategoryListEng.toMutableList()
+                            initRecyclerView()
+                        }else if (document.get("premium") == true && currentLang == "es"){
+                            Log.d(ContentValues.TAG, "Usuario premium")
+                            binding.imageUser.setImageResource(R.drawable.premium)
+                            qzCategoryMutableList = QzCategoryProviderPremium.qzCategoryList.toMutableList()
+                            initRecyclerView()
+                        }else{
+                            Log.d(ContentValues.TAG, "Imposible determinar Premium")
+                        }
+                    } else {
+                        qzCategoryMutableList = QzCategoryProvider.qzCategoryList.toMutableList()
+                        initRecyclerView()
+                        Log.d(ContentValues.TAG, "Campo premium nulo")
+                    }
+                }
+            } catch (e: Exception) {
+                Log.d(ContentValues.TAG, "Error al obtener las monedas", e)
+            }
+        }
     }
 
 }

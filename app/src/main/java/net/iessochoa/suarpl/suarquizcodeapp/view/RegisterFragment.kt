@@ -83,12 +83,14 @@ class RegisterFragment : Fragment() {
     CoroutineScope(Dispatchers.IO).launch {
         try {
             docRef.set(
-                hashMapOf("coins" to "7000",
+                hashMapOf("coins" to "1000",
                     "name" to binding.RegisterName.text.toString(),
-                    "mail" to binding.RegisterEmailAddress.text.toString())
+                    "mail" to binding.RegisterEmailAddress.text.toString(),
+                    "premium" to false)
+
             ).await()
             withContext(Dispatchers.Main) {
-                Toast.makeText(activity, "Añadidas 7000 monedas", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, "Añadidas 1000 monedas", Toast.LENGTH_LONG).show()
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {

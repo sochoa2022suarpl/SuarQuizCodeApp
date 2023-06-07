@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/imageUser"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/user"
@@ -23,17 +23,17 @@
         android:id="@+id/tvUsername"
         android:layout_width="218dp"
         android:layout_height="33dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="30dp"
         android:text="@string/tvUsuario"
         android:textColor="@color/Black"
-        android:textSize="20sp"
+        android:textSize="28sp"
         app:layout_constraintStart_toEndOf="@+id/imageUser"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ivCoin"
-        android:layout_width="77dp"
+        android:layout_width="54dp"
         android:layout_height="54dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
@@ -47,7 +47,7 @@
         android:layout_width="71dp"
         android:layout_height="26dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="68dp"
         android:text="@string/tv_cantMonedas"
         android:textColor="@color/Black"
         android:textSize="20sp"
@@ -58,8 +58,7 @@
         android:id="@+id/tvMonedas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="70dp"
         android:text="@string/tv_monedas"
         android:textColor="@color/Black"
         android:textSize="16sp"
@@ -82,10 +81,10 @@
         android:id="@+id/rgDifficulty"
         android:layout_width="259dp"
         android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="36dp"
-        android:orientation="horizontal"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/radiusgreen"
+        android:orientation="horizontal"
         app:layout_constraintStart_toEndOf="@+id/ivCoin"
         app:layout_constraintTop_toBottomOf="@+id/tvMonedas">
 
@@ -111,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:text="@string/tv_dificultad"
         android:textColor="@color/Black"
@@ -135,8 +134,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="79dp"
-        android:layout_height="76dp"
+        android:layout_width="99dp"
+        android:layout_height="93dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/logo"
@@ -148,20 +147,36 @@
         android:layout_width="140dp"
         android:layout_height="48dp"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/DarkSlateBlue"
+        android:drawableLeft="@android:drawable/ic_menu_close_clear_cancel"
         android:text="@string/bt_salir"
+        android:textSize="12sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btRanking"
-        android:layout_width="171dp"
+        android:id="@+id/btDeleteAcc"
+        android:layout_width="109dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/Goldenrod"
+        android:drawableLeft="@android:drawable/ic_menu_sort_by_size"
+        android:text="@string/ranking"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <Button
+        android:id="@+id/btRank"
+        android:layout_width="200dp"
         android:layout_height="48dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/DarkSlateBlue"
+        android:drawableLeft="@android:drawable/ic_menu_delete"
         android:text="@string/borrar_cuenta"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -181,5 +196,21 @@
         android:textColorHint="#311B92"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/rgDifficulty" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="6dp"
+        android:backgroundTint="@color/Orange"
+        android:clickable="true"
+        android:foregroundTint="@color/OrangeRed"
+        android:src="@drawable/ic_shopping_cart"
+        android:background="@drawable/gold_gradient"
+        android:tint="@color/Orange"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

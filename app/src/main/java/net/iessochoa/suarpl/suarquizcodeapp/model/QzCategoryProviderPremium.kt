@@ -5,7 +5,7 @@ Provider de categorías que se obtendrán desde el RecyclerView,
 se deja este a modo de ejemplo para comprobar cómo se haría
 localmente. Las preguntas sí se obtienen desde la BD Firestore
 */
-class QzCategoryProvider {
+class QzCategoryProviderPremium {
     companion object{
         val qzCategoryList = listOf<QzCategory>(
             QzCategory(
@@ -20,13 +20,23 @@ class QzCategoryProvider {
             ),
             QzCategory(
                 "https://logospng.org/download/typescript/typescript-256.png",
-                "TYPESCRYPT",
+                "TYPESCRIPT",
                 "TYPESCRYPT"
+            ),
+            QzCategory(
+                "https://logospng.org/download/git/git-256.png",
+                "GIT",
+                "GIT"
             ),
             QzCategory(
                 "https://logospng.org/download/html-5/logo-html-5-256.png",
                 "HTML",
                 "HTML"
+            ),
+            QzCategory(
+                "https://logospng.org/download/mysql/mysql-256.png",
+                "MYSQL",
+                "MYSQL"
             ),
             QzCategory(
                 "https://logospng.org/download/java/logo-java-256.png",

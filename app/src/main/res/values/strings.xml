@@ -17,6 +17,7 @@
     <string name="tv_splash">Desarrollado por Suar PL</string>
     <string name="iv_SplashDescription">SplashLogo</string>
     <string name="te_nombreRegistro">Nombre de usuario</string>
+    <string name="tv_loginEmail">E-mail de usuario</string>
     <string name="tv_cantMonedas">XXXXXX</string>
     <string name="tv_monedas">monedas</string>
     <string name="rb_dificil">Difícil</string>
@@ -24,6 +25,7 @@
     <string name="tv_dificultad">Dificultad</string>
     <string name="tv_selecCategoria">Categoría</string>
     <string name="bt_salir">SALIR</string>
+    <string name="bt_volver">VOLVER</string>
     <string name="bt_ranking">RANKING</string>
     <string name="tvSelecLenguaje">Selecciona lenguaje</string>
     <string name="tv_NowRegistered">¿Ya tienes una cuenta? Inicia sesión</string>
@@ -44,7 +46,8 @@
     <string name="tvTotal">Total</string>
     <string name="tvUsuario">Usuario</string>
     <string name="etFiltrarCateHint">Filtrar categoría</string>
-    <string name="borrar_cuenta">BORRAR CUENTA</string>
+    <string name="borrar_cuenta">Borrar Cuenta</string>
+    <string name="ranking">RANK</string>
     <string name="tiempo_100">Tiempo fijado a 100 segs</string>
     <string name="tiempo_60">Tiempo fijado a 60 segs</string>
     <string name="quieres_salir">¿Quieres salir de la aplicación?</string>
@@ -52,7 +55,15 @@
     <string name="no">No</string>
     <string name="quieres_borrar">¿Quieres borrar la cuenta?</string>
     <string name="cuenta_borrada">Cuenta borrada satisfactoriamente</string>
+    <string name="shop_articulo_comprado">Artículo adquirido satisfactoriamente</string>
     <string name="error_borrado">Error al borrar la cuenta</string>
     <string name="resp_correcta">Correcto!</string>
     <string name="resp_incorrecta">Incorrecto!</string>
+    <string name="max_puntuacion">Puntuaciones</string>
+    <string name="shop_title">Tienda</string>
+    <string name="shop_item1">Pack DLC 1, que incluye dos nuevas categorías de test adicionales.</string>
+    <string name="shop_allPurchased">Ya has comprado todos los artículos disponibles, pronto llegarán nuevos con las siguientes actualizaciones, permanece alerta!</string>
+    <string name="shop_bt_comprar">COMPRAR</string>
+    <string name="shop_ya_adquirido">YA ADQUIRIDO</string>
+
 </resources>

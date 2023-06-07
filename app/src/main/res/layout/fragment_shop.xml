@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gold_gradient"
+    tools:context=".view.ScoreFragment">
+
+    <ImageView
+        android:id="@+id/ivShopIcon"
+        android:layout_width="48dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/token"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/tvShopTitle"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/shop_title"
+        android:textColor="@color/Black"
+
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivShopIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/shopCoinsImage"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="-8dp"
+        android:src="@drawable/token"
+        app:layout_constraintEnd_toStartOf="@+id/shopCurrentCoins"
+        app:layout_constraintTop_toTopOf="@+id/shopCurrentCoins" />
+
+    <TextView
+        android:id="@+id/shopCurrentCoins"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="6dp"
+        android:text="@string/tv_cantMonedas"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/allPurchased"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="6dp"
+        android:background="#FDFDFD"
+        android:enabled="false"
+        android:padding="10dp"
+        android:text="@string/shop_allPurchased"
+        android:textColor="@color/Black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvShopTitle" />
+
+    <ImageView
+        android:id="@+id/shopItem1Image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="6dp"
+        android:src="@drawable/premiumpack1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvShopTitle"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/shopDescItem1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:background="#FDFDFD"
+        android:padding="10dp"
+        android:text="@string/shop_item1"
+        android:textColor="@color/Black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shopItem1Image" />
+
+    <Button
+        android:id="@+id/btShopItem1"
+        android:layout_width="200dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/DarkSlateBlue"
+        android:text="@string/shop_bt_comprar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shopDescItem1" />
+
+    <Button
+        android:id="@+id/btBack"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/DarkSlateBlue"
+        android:drawableLeft="@android:drawable/ic_media_rew"
+        android:text="@string/bt_volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

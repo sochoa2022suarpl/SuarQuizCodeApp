@@ -5,7 +5,7 @@
     android:id="@+id/frQuiz"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Lavender"
+    android:background="@drawable/quiz_gradient"
     tools:context=".view.QuizFragment" >
     <TextView
         android:id="@+id/tvTituloCategory"
