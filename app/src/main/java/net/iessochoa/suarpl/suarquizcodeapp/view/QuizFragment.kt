@@ -11,13 +11,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import kotlinx.coroutines.tasks.await
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentQuizBinding
 import net.iessochoa.suarpl.suarquizcodeapp.viewmodel.QuestionViewModel
@@ -115,7 +110,7 @@ class QuizFragment : Fragment() {
     }
 
     //Método para cargar pregunta/respuestas usando ViewModel/LiveData/Repository desde Firebase
-    fun loadQuestions(indice: Int){
+    private fun loadQuestions(indice: Int){
         questionViewModel.getLiveDataFromCategory(selectedCategory).observe(viewLifecycleOwner, Observer {
             val i = indice
             answer = it[i].answer.toString()
@@ -137,11 +132,12 @@ class QuizFragment : Fragment() {
     //Método para recuperar categoría seleccionada por safeargs
     fun loadCategory(){
         selectedCategory = args.category
+        binding.tvTituloCategory.text = args.category
     }
 
     //Asignación de comprobación de respuesta correcta según botón pulsado
     fun setButtonBindCheck(){
-        if(canAnswer==true){
+        if(canAnswer){
             binding.btRespuesta1.setOnClickListener{checkAnswer(binding.btRespuesta1)}
             binding.btRespuesta2.setOnClickListener{checkAnswer(binding.btRespuesta2)}
             binding.btRespuesta3.setOnClickListener{checkAnswer(binding.btRespuesta3)}

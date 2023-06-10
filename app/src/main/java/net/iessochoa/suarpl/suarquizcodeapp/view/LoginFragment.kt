@@ -17,15 +17,16 @@ import net.iessochoa.suarpl.suarquizcodeapp.R
 import net.iessochoa.suarpl.suarquizcodeapp.databinding.FragmentLoginBinding
 import kotlin.system.exitProcess
 
-
+//Fragmento Login
 class LoginFragment : Fragment() {
 
     //Variables ViewBinding
-    private var _binding:FragmentLoginBinding? = null
+    private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
     //Variables login
-    lateinit var password:String
-    lateinit var mail:String
+    lateinit var password: String
+    lateinit var mail: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,16 +61,16 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvRegister.setOnClickListener{
+        binding.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-            }
+        }
 
         /*
         Autenticación usando Firebase Auth
          */
-        binding.buttonLogin.setOnClickListener{
-             password = binding.editTextTextPassword.text.toString()
-             mail = binding.editTextTextEmailAddress.text.toString()
+        binding.buttonLogin.setOnClickListener {
+            password = binding.editTextTextPassword.text.toString()
+            mail = binding.editTextTextEmailAddress.text.toString()
             //Inicio de sesión Usando Coroutines
             if (mail.isValidEmail() && password.isNotEmpty()) {
                 //contexto de tipo Dispatchers.IO para realizar la operación de inicio de sesión en segundo plano
@@ -77,15 +78,22 @@ class LoginFragment : Fragment() {
                     delay(3000L)
                     try {
                         //suspensión await() para que se pueda llamar dentro del contexto de IO.
-                        val authResult = FirebaseAuth.getInstance().signInWithEmailAndPassword(mail, password).await()
+                        val authResult =
+                            FirebaseAuth.getInstance().signInWithEmailAndPassword(mail, password)
+                                .await()
                         //cambio de contexto y resolución en el hilo principal
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(activity, "Sesión iniciada correctamente", Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                activity,
+                                "Sesión iniciada correctamente",
+                                Toast.LENGTH_LONG
+                            ).show()
                             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         }
                     } catch (e: Exception) {
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(activity, "Error al iniciar sesión", Toast.LENGTH_LONG).show()
+                            Toast.makeText(activity, "Error al iniciar sesión", Toast.LENGTH_LONG)
+                                .show()
                         }
                     }
                 }
@@ -94,9 +102,11 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
     /*
     Validador usando API de Google
      */
-    fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+    fun CharSequence?.isValidEmail() =
+        !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 }
