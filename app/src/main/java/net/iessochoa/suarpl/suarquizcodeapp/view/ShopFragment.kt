@@ -25,7 +25,7 @@ import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProvider
 import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProviderEng
 import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProviderPremium
 import net.iessochoa.suarpl.suarquizcodeapp.model.QzCategoryProviderPremiumEng
-
+// Fragmento utilizado para hacer compras y desbloquear elementos in app
 class ShopFragment : Fragment() {
     //Variables ViewBinding
     private var _binding: FragmentShopBinding? = null
@@ -134,6 +134,7 @@ class ShopFragment : Fragment() {
             }
         }
     }
+    //Obtiene monedas desde FB
     private fun getUserCoins() {
         val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
         val docRef = db.collection("users").document(currentUser)

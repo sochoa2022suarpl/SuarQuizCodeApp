@@ -1,7 +1,6 @@
 package net.iessochoa.suarpl.suarquizcodeapp.view
 
 import android.app.AlertDialog
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -30,7 +29,7 @@ import net.iessochoa.suarpl.suarquizcodeapp.model.*
 import java.util.*
 import kotlin.system.exitProcess
 
-
+//Fragmento principal, desde el que accedemos a todo
 class HomeFragment : Fragment() {
     //Variables ViewBinding
     private var _binding: FragmentHomeBinding? = null
@@ -52,7 +51,8 @@ class HomeFragment : Fragment() {
     private var secondsLeft: Int = 100
 
     //String que pasamos a QuizFragment para identificar el cuestionario
-    private var quizCategoryString :String = "JAVA"
+    private var quizCategoryString: String = "JAVA"
+
     //Instancia a Firestore
     val db = Firebase.firestore
 
@@ -86,9 +86,11 @@ class HomeFragment : Fragment() {
             exitApp()
         }
         //Añadimos listener al filtro de categorías, y filtramos la lista de ellas
-        binding.etFilterCat.addTextChangedListener {userFilter ->
+        binding.etFilterCat.addTextChangedListener { userFilter ->
             //La almacenamos en una constante, usamos lowerkeys para ignorar diferencias entre mays/mins
-            val qzCategoryListFiltered = qzCategoryMutableList.filter { qzCategory -> qzCategory.catName.lowercase().contains(userFilter.toString().lowercase())}
+            val qzCategoryListFiltered = qzCategoryMutableList.filter { qzCategory ->
+                qzCategory.catName.lowercase().contains(userFilter.toString().lowercase())
+            }
             //Llamamos al método del adaptador que actualiza la lista de categorías
             adapter.updateQuizList(qzCategoryListFiltered)
         }
@@ -104,7 +106,7 @@ class HomeFragment : Fragment() {
             val next = HomeFragmentDirections.actionHomeFragmentToScoreFragment()
             findNavController().navigate(next)
         }
-        binding.floatingActionButton.setOnClickListener{
+        binding.floatingActionButton.setOnClickListener {
             val next = HomeFragmentDirections.actionHomeFragmentToShopFragment()
             findNavController().navigate(next)
         }
@@ -114,7 +116,7 @@ class HomeFragment : Fragment() {
         del radiobutton y cambia la variable que contiene los segundos restantes
         que pasaremos al fragmento del cuestionario
          */
-        binding.rgDifficulty.setOnCheckedChangeListener { group, i ->
+        binding.rgDifficulty.setOnCheckedChangeListener { _, i ->
             when (i) {
                 binding.rbNormal.id -> {
                     binding.rgDifficulty.setBackgroundResource(R.drawable.radiusgreen)
@@ -143,22 +145,27 @@ class HomeFragment : Fragment() {
     private fun initRecyclerView() {
         adapter = CategoryAdapter(
             qzCategoryList = qzCategoryMutableList,
-            onClickListener = {QzCategory -> onItemselected(QzCategory)}
+            onClickListener = { QzCategory -> onItemselected(QzCategory) }
         )
         //Se le asigna un layout y un adaptador
         binding.recyclerView.layoutManager = llmanager
         binding.recyclerView.adapter = adapter
     }
+
     //Función que controla el item del RecyclerView Pulsado
-    private fun onItemselected(quizCategory:QzCategory){
+    private fun onItemselected(quizCategory: QzCategory) {
         //Asignamos el valor de la categoría pulsada a la variable que pasaremos al fragment home
         quizCategoryString = quizCategory.catFBValue
         //Navegamos al fragment Home pasando segundos restantes y categoría pulsada
         binding.apply {
-            val next = HomeFragmentDirections.actionHomeFragmentToQuizFragment(secondsLeft, quizCategoryString)
+            val next = HomeFragmentDirections.actionHomeFragmentToQuizFragment(
+                secondsLeft,
+                quizCategoryString
+            )
             findNavController().navigate(next)
         }
     }
+
     /*
     AlertDialog para salir de la aplicación
     */
@@ -172,6 +179,7 @@ class HomeFragment : Fragment() {
         alert.setTitle(getString(R.string.bt_salir))
         alert.show()
     }
+
     //Borrar la cuenta, dialog
     private fun deleteAccount() {
         val deleteDialog = AlertDialog.Builder(activity)
@@ -184,24 +192,24 @@ class HomeFragment : Fragment() {
         alert.show()
     }
 
-    private fun deleteCurrentAccount(){
+    private fun deleteCurrentAccount() {
         val user = FirebaseAuth.getInstance().currentUser!!
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 user.delete().await()
                 withContext(Dispatchers.Main) {
-                        Toast.makeText(activity, getString(R.string.cuenta_borrada), Toast.LENGTH_SHORT)
-                            .show()
-                        findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+                    Toast.makeText(activity, getString(R.string.cuenta_borrada), Toast.LENGTH_SHORT)
+                        .show()
+                    findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
 
                 }
             } catch (e: Exception) {
-                Toast.makeText(activity, getString(R.string.cuenta_borrada), Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, getString(R.string.cuenta_borrada), Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
-
 
 
     //Método que obtiene el nombre del usuario logueado
@@ -224,6 +232,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
     //Método que obtiene las monedas actuales del usuario logueado, usando corrutinas
     private fun getUserCoins() {
         val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
@@ -240,10 +249,11 @@ class HomeFragment : Fragment() {
                     }
                 }
             } catch (e: Exception) {
-                Log.d(ContentValues.TAG, "Error al obtener las monedas", e)
+                Log.d(TAG, "Error al obtener las monedas", e)
             }
         }
     }
+
     //Método que fija las monedas en 3000 en caso de que no exista el campo en la BD Firestore,
     // usando corrutinas
     private fun setUserDefaults() = CoroutineScope(Dispatchers.IO).launch {
@@ -267,34 +277,38 @@ class HomeFragment : Fragment() {
                 val document = docRef.get().await()
                 withContext(Dispatchers.Main) {
                     if (document.get("premium") != null) {
-                        if (document.get("premium") == false && currentLang == "es"){
-                            qzCategoryMutableList = QzCategoryProvider.qzCategoryList.toMutableList()
+                        if (document.get("premium") == false && currentLang == "es") {
+                            qzCategoryMutableList =
+                                QzCategoryProvider.qzCategoryList.toMutableList()
                             initRecyclerView()
-                        }else if (document.get("premium") == false && currentLang != "es"){
+                        } else if (document.get("premium") == false && currentLang != "es") {
 
-                            qzCategoryMutableList = QzCategoryProviderEng.qzCategoryListEng.toMutableList()
+                            qzCategoryMutableList =
+                                QzCategoryProviderEng.qzCategoryListEng.toMutableList()
                             initRecyclerView()
-                        }else if (document.get("premium") == true && currentLang != "es"){
-                            Log.d(ContentValues.TAG, "Usuario premium")
+                        } else if (document.get("premium") == true && currentLang != "es") {
+                            Log.d(TAG, "Usuario premium")
                             binding.imageUser.setImageResource(R.drawable.premium)
-                            qzCategoryMutableList = QzCategoryProviderPremiumEng.qzCategoryListEng.toMutableList()
+                            qzCategoryMutableList =
+                                QzCategoryProviderPremiumEng.qzCategoryListEng.toMutableList()
                             initRecyclerView()
-                        }else if (document.get("premium") == true && currentLang == "es"){
-                            Log.d(ContentValues.TAG, "Usuario premium")
+                        } else if (document.get("premium") == true && currentLang == "es") {
+                            Log.d(TAG, "Usuario premium")
                             binding.imageUser.setImageResource(R.drawable.premium)
-                            qzCategoryMutableList = QzCategoryProviderPremium.qzCategoryList.toMutableList()
+                            qzCategoryMutableList =
+                                QzCategoryProviderPremium.qzCategoryList.toMutableList()
                             initRecyclerView()
-                        }else{
-                            Log.d(ContentValues.TAG, "Imposible determinar Premium")
+                        } else {
+                            Log.d(TAG, "Imposible determinar Premium")
                         }
                     } else {
                         qzCategoryMutableList = QzCategoryProvider.qzCategoryList.toMutableList()
                         initRecyclerView()
-                        Log.d(ContentValues.TAG, "Campo premium nulo")
+                        Log.d(TAG, "Campo premium nulo")
                     }
                 }
             } catch (e: Exception) {
-                Log.d(ContentValues.TAG, "Error al obtener las monedas", e)
+                Log.d(TAG, "Error al obtener las monedas", e)
             }
         }
     }
