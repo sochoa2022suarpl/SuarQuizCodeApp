@@ -39,15 +39,20 @@ _Las herramientas utilizadas para la creación del proyecto son:_
 * [Adobe Photoshop](https://www.adobe.com/es/creativecloud/plans.html?plan=individual&filter=all&promoid=PYPVPZQK&mv=other) - Editor de imagen, versión 23.1.0
 * [Vegas Pro](https://www.vegascreativesoftware.com/es/vegas-pro/) - Editor de vídeo , versión 19.0
 
-## Documentación del desarrollo de las unidades funcionales(Entregas disponibles 4/4)✒️
+## Documentación del desarrollo de las unidades funcionales(6/6)✒️
+
+A continuación se proporcionan documentos muy detallados en tiempo de desarrollo de cada una de las unidades funcionales:
 
 * [Entrega 1 - UI](https://docs.google.com/document/d/1dtDohkQmsyto_bodBWqKGzQe9TlslGGBD7njxhS0HwM/edit?usp=sharing)
 * [Entrega 2 - MVVM](https://docs.google.com/document/d/1Jh_hihz_6VyZu6E-fmf6JNoFgpbCKDsKqUDw4mj5uW4/edit?usp=sharing)
 * [Entrega 3 - CORRUTINAS](https://docs.google.com/document/d/1OG5RHxiAFN7ulR4FBad5fRh4f4e3oiLBvaNGOO4GgiQ/edit?usp=sharing)
 * [Entrega 4 - PERSISTENCIA DE DATOS, FIREBASE](https://docs.google.com/document/d/1FeoLt_WuIJzGN_FL0Jq5lGKyO4h6ZkEXu6eg3JyWpPE/edit?usp=sharing)
+* [Entrega 5 - CARACTERÍSTICAS ADICIONALES, MULTIIDIOMA](https://docs.google.com/document/d/1daQei9GQ2UErb4fiB2_Iasth3byKKS0JV4OcL5xeEQU/edit?usp=sharing)
 * [Entrega Final - ANÁLISIS, OPINIÓN PERSONAL](https://docs.google.com/document/d/1u0lnRmE2GorvCO9luaK0r9UgXikRyRhPaDnvJ3H8FIs/edit?usp=sharing)
 
-## Vídeo demostrativo de unidades funcionales(Entregas disponibles 4/4) 🎞️
+## Vídeo demostrativo de unidades funcionales(4/4) 🎞️
+
+Estos son los vídeos demostrativos de cada una de las unidades funcionales en tiempo de desarrollo:
 
 * [Entrega 1 - UI](https://youtu.be/vQqhkbQEXkY)
 * [Entrega 2 - MVVM](https://youtu.be/K0vA10X1eYs)
