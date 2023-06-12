@@ -20,7 +20,7 @@ class QzCategoryProvider {
             ),
             QzCategory(
                 "https://logospng.org/download/typescript/typescript-256.png",
-                "TYPESCRYPT",
+                "TYPESCRIPT",
                 "TYPESCRYPT"
             ),
             QzCategory(
