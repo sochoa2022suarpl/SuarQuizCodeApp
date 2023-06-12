@@ -58,17 +58,17 @@ class RegisterFragment : Fragment() {
                         FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail, password).await()
                         createNewFirebaseUser()
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(activity, "Usuario registrado correctamente", Toast.LENGTH_LONG).show()
+                            Toast.makeText(activity, getString(R.string.reg_success), Toast.LENGTH_LONG).show()
                             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                         }
                     } catch (e: Exception) {
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(activity, e.localizedMessage, Toast.LENGTH_LONG).show()
+                            Toast.makeText(activity, getString(R.string.reg_error), Toast.LENGTH_LONG).show()
                         }
                     }
                 }
             } else {
-                Toast.makeText(activity, "Introduce valores válidos", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, getString(R.string.ses_notvalid), Toast.LENGTH_LONG).show()
             }
         }
         //Volver a login
@@ -90,7 +90,7 @@ class RegisterFragment : Fragment() {
 
             ).await()
             withContext(Dispatchers.Main) {
-                Toast.makeText(activity, "Añadidas 1000 monedas", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, getString(R.string.coin_add), Toast.LENGTH_LONG).show()
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {

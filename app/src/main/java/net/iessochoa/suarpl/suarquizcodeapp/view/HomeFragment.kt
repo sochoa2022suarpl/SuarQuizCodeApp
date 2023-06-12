@@ -1,12 +1,14 @@
 package net.iessochoa.suarpl.suarquizcodeapp.view
 
 import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
@@ -111,6 +113,15 @@ class HomeFragment : Fragment() {
             findNavController().navigate(next)
         }
 
+        binding.tvUsername.setOnLongClickListener {
+            showNameInputDialog()
+            true
+        }
+
+        binding.imageView4.setOnClickListener{
+            logout()
+        }
+
         /*
         Al cambiar la dificultad con los radiobuttons, cambia el color
         del radiobutton y cambia la variable que contiene los segundos restantes
@@ -173,10 +184,72 @@ class HomeFragment : Fragment() {
         val salirDialog = AlertDialog.Builder(activity)
         salirDialog.setMessage(getString(R.string.quieres_salir))
             .setCancelable(false)
-            .setPositiveButton(getString(R.string.si)) { _, _ -> exitProcess(0) }
+            .setPositiveButton(getString(R.string.si)) { _, _ ->
+                logoutFirebaseAuth()
+                exitProcess(0)
+            }
             .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.cancel() }
         val alert = salirDialog.create()
         alert.setTitle(getString(R.string.bt_salir))
+        alert.show()
+    }
+    //Cambiar nombre, mostrar diálogo
+    private fun showNameInputDialog() {
+        val dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_name_input, null)
+        val nameEditText = dialogView.findViewById<EditText>(R.id.editTextName)
+
+        val alertDialog = AlertDialog.Builder(activity)
+            .setView(dialogView)
+            .setCancelable(false)
+            .setPositiveButton("ACEPTAR") { _, _ ->
+                val enteredName = nameEditText.text.toString()
+                Toast.makeText(activity, "Nombre introducido: $enteredName", Toast.LENGTH_SHORT).show()
+                updateUserName(enteredName)
+            }
+            .setNegativeButton("CANCELAR") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+
+        alertDialog.setTitle("Introducir nombre")
+        alertDialog.show()
+    }
+    //Actualizando nombre en FB
+    private fun updateUserName(name: String) {
+        val currentUser = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val docRef = db.collection("users").document(currentUser)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                docRef.update("name", name).await()
+                withContext(Dispatchers.Main) {
+                    getConnectedUserName()
+                    Toast.makeText(activity, "Nombre actualizado correctamente", Toast.LENGTH_SHORT).show()
+                }
+
+            } catch (e: Exception) {
+                Toast.makeText(activity, "Error actualizando nombre", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+    //Logout FB
+    fun logoutFirebaseAuth() {
+        FirebaseAuth.getInstance().signOut()
+    }
+    private fun logout() {
+        val logoutDialog = AlertDialog.Builder(activity)
+        logoutDialog.setMessage(getString(R.string.alert_logout))
+            .setCancelable(false)
+            .setPositiveButton(getString(R.string.si)) { _, _ ->
+                logoutFirebaseAuth()
+                findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+
+            }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.cancel() }
+        val alert = logoutDialog.create()
+        alert.setTitle(getString(R.string.alert_title_logout))
         alert.show()
     }
 
@@ -287,13 +360,11 @@ class HomeFragment : Fragment() {
                                 QzCategoryProviderEng.qzCategoryListEng.toMutableList()
                             initRecyclerView()
                         } else if (document.get("premium") == true && currentLang != "es") {
-                            Log.d(TAG, "Usuario premium")
                             binding.imageUser.setImageResource(R.drawable.premium)
                             qzCategoryMutableList =
                                 QzCategoryProviderPremiumEng.qzCategoryListEng.toMutableList()
                             initRecyclerView()
                         } else if (document.get("premium") == true && currentLang == "es") {
-                            Log.d(TAG, "Usuario premium")
                             binding.imageUser.setImageResource(R.drawable.premium)
                             qzCategoryMutableList =
                                 QzCategoryProviderPremium.qzCategoryList.toMutableList()
@@ -308,7 +379,7 @@ class HomeFragment : Fragment() {
                     }
                 }
             } catch (e: Exception) {
-                Log.d(TAG, "Error al obtener las monedas", e)
+                Log.d(TAG, "Error al obtener el estado Premium", e)
             }
         }
     }

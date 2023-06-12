@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isGone
 import androidx.navigation.fragment.findNavController
 import net.iessochoa.suarpl.suarquizcodeapp.R
@@ -39,6 +40,11 @@ class ShopFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
         getUserPremium()
         getUserCoins()
         }
@@ -66,7 +72,7 @@ class ShopFragment : Fragment() {
                 getUserPremium()
 
             }else{
-                Log.d(ContentValues.TAG, "Monedas insuficientes")
+                Toast.makeText(activity, getString(R.string.coin_notenough), Toast.LENGTH_LONG).show()
             }
         }
     }
