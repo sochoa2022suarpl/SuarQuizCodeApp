@@ -31,6 +31,15 @@
     <string name="tv_NowRegistered">¿Ya tienes una cuenta? Inicia sesión</string>
     <string name="tvTituloCategory">KOTLIN</string>
 
+    <string name="ses_iniciada">Sesión iniciada correctamente</string>
+    <string name="ses_error">Error al iniciar la sesión</string>
+    <string name="ses_notvalid">Campos vacíos o no válidos</string>
+    <string name="reg_success">Usuario registrado correctamente</string>
+    <string name="reg_error">Error al registrar usuario</string>
+
+    <string name="coin_add">Añadidas 1000 monedas</string>
+    <string name="coin_notenough">No tienes suficientes monedas</string>
+
     <string name="tvCurrentPreg">1</string>
     <string name="tvPregunta">¿Qué representa "fname" en el siguiente código: fun myFunction(fname: String)?</string>
     <string name="tvTitPregunta">Pregunta</string>
@@ -48,8 +57,8 @@
     <string name="etFiltrarCateHint">Filtrar categoría</string>
     <string name="borrar_cuenta">Borrar Cuenta</string>
     <string name="ranking">RANK</string>
-    <string name="tiempo_100">Tiempo fijado a 100 segs</string>
-    <string name="tiempo_60">Tiempo fijado a 60 segs</string>
+    <string name="tiempo_100">Tiempo fijado a 100 segundos</string>
+    <string name="tiempo_60">Tiempo fijado a 60 segundos</string>
     <string name="quieres_salir">¿Quieres salir de la aplicación?</string>
     <string name="si">Sí</string>
     <string name="no">No</string>
@@ -65,5 +74,9 @@
     <string name="shop_allPurchased">Ya has comprado todos los artículos disponibles, pronto llegarán nuevos con las siguientes actualizaciones, permanece alerta!</string>
     <string name="shop_bt_comprar">COMPRAR</string>
     <string name="shop_ya_adquirido">YA ADQUIRIDO</string>
+
+    <string name="alert_logout">¿Quieres cerrar sesión?</string>
+    <string name="alert_title_logout">CERRAR SESIÓN</string>
+    <string name="edit_nombre">Introduce un nuevo nombre</string>
 
 </resources>

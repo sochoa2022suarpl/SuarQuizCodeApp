@@ -37,12 +37,12 @@ class LoginFragment : Fragment() {
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val salirDialog = AlertDialog.Builder(activity)
-                salirDialog.setMessage("¿Quieres salir de la aplicación ???")
+                salirDialog.setMessage(getString(R.string.quieres_salir))
                     .setCancelable(false)
-                    .setPositiveButton("Sí") { _, _ -> exitProcess(0) }
-                    .setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+                    .setPositiveButton(getString(R.string.si)) { _, _ -> exitProcess(0) }
+                    .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.cancel() }
                 val alert = salirDialog.create()
-                alert.setTitle("Salir")
+                alert.setTitle(getString(R.string.bt_salir))
                 alert.show()
             }
         }
@@ -85,20 +85,20 @@ class LoginFragment : Fragment() {
                         withContext(Dispatchers.Main) {
                             Toast.makeText(
                                 activity,
-                                "Sesión iniciada correctamente",
+                                getString(R.string.ses_iniciada),
                                 Toast.LENGTH_LONG
                             ).show()
                             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         }
                     } catch (e: Exception) {
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(activity, "Error al iniciar sesión", Toast.LENGTH_LONG)
+                            Toast.makeText(activity, getString(R.string.ses_error), Toast.LENGTH_LONG)
                                 .show()
                         }
                     }
                 }
             } else {
-                Toast.makeText(activity, "Introduce todos los caracteres", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, getString(R.string.ses_notvalid), Toast.LENGTH_LONG).show()
             }
         }
     }

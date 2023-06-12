@@ -132,7 +132,6 @@ class QuizFragment : Fragment() {
     //Método para recuperar categoría seleccionada por safeargs
     fun loadCategory(){
         selectedCategory = args.category
-        binding.tvTituloCategory.text = args.category
     }
 
     //Asignación de comprobación de respuesta correcta según botón pulsado

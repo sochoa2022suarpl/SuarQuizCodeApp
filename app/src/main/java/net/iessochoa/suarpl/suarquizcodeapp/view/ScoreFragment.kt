@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,15 @@ class ScoreFragment : Fragment() {
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val scoresCollection = firestore.collection("users")
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+      
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,7 +70,7 @@ class ScoreFragment : Fragment() {
                 adapter.setScores(scoresList)
             }
             .addOnFailureListener { exception ->
-                // Manejar la excepción de manera adecuada
+
             }
     }
 }
